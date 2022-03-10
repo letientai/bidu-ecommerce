@@ -1,0 +1,34 @@
+.header__container {
+  background-color: black;
+  color: white;
+  .header__main {
+    margin: auto;
+    width: 85%;
+    max-width: 1350px;
+    display: flex;
+    justify-content: space-between;
+    .col {
+      width: 300px;
+      display: flex;
+      font-size: 14px;
+      p {
+        margin: 6px;
+        cursor: pointer;
+        font-weight: bolder;
+        &:hover{
+          color: rgb(187, 58, 165);
+        }
+      }
+      span {
+        height: 100%;
+        width: 0.2px;
+        border-left: 0.2px solid white;
+      }
+    }
+    .right{
+        p{
+            margin: 6px 17px;
+        }
+    }
+  }
+}

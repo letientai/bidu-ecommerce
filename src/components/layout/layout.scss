@@ -1,0 +1,30 @@
+//NAVBAR
+
+.login{
+  position: absolute;
+}
+.content_main {
+  width: 83%;
+  max-width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  .logo {
+    width: 100px;
+    img {
+      width: 100%;
+    }
+  }
+  .search {
+    width: 50%;
+  }
+  .option {
+    width: 20%;
+    img{
+        width: 19px;
+        margin: 5px 12px;
+        cursor: pointer;
+    }
+  }
+}
