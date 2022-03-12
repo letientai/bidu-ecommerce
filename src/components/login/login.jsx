@@ -6,18 +6,30 @@ import logo1 from "../../assets/img-login/facebook.svg";
 import logo2 from "../../assets/img-login/google.svg";
 import logo3 from "../../assets/img-login/zalo.svg";
 import logo4 from "../../assets/img-login/apple.svg";
+import Cursor from "../../assets/img/cursor.png";
 import auth_background from "../../assets/img-login/auth_background.svg";
 import text_bidu from "../../assets/img-login/text_bidu.svg";
 import icon_close_menu from "../../assets/img-login/icon_close_menu.svg";
-export const Login = () => {
+export const Login = (prop) => {
   const initialValues = {
     username: "",
     password: "",
   };
 
+  const closeLogin = () => {
+    prop.closeLogin(false);
+  };
+
+  const openRegister = () =>{
+    prop.openRegister(true)
+  }
   return (
     <div className="container">
-      <div className="outsite"></div>
+      <div
+        className="outsite"
+        onClick={closeLogin}
+        style={{ cursor: `url(${Cursor}), pointer` }}
+      ></div>
       <div className="form">
         <div
           className="intro"
@@ -27,7 +39,7 @@ export const Login = () => {
         </div>
         <div className="form__login">
           <div className="form__header">
-            <img src={icon_close_menu} alt="" />
+            <img src={icon_close_menu} alt="" onClick={closeLogin} />
           </div>
           <Formik
             initialValues={initialValues}
@@ -76,7 +88,7 @@ export const Login = () => {
             </div>
             <b>Quên mật khẩu</b>
             <div className="register">
-              <span>Không có tài khoản? </span> <p>Đăng ký</p>
+              <span>Không có tài khoản? </span>  <p onClick={openRegister}> Đăng ký </p>
             </div>
           </div>
         </div>
