@@ -3,20 +3,29 @@ import "./register.scss";
 import { Formik, FastField, Form } from "formik";
 import auth_background from "../../assets/img-login/auth_background.svg";
 import text_bidu from "../../assets/img-login/text_bidu.svg";
+import Cursor from "../../assets/img/cursor.png";
 import icon_close_menu from "../../assets/img-login/icon_close_menu.svg";
 import { RegisterSchema } from "./validate";
-export const Register = () => {
+export const Register = (prop) => {
   const initialValues = {
     username: "",
-    email:"",
+    email: "",
     password: "",
     confimlPassword: "",
     phone: "",
   };
+
+  const closeRegister = () => {
+    prop.closeRegister(false);
+  };
   return (
     <div>
       <div className="container">
-        <div className="outsite"></div>
+        <div
+          className="outsite"
+          onClick={closeRegister}
+          style={{ cursor: `url(${Cursor}), pointer` }}
+        ></div>
         <div className="form">
           <div
             className="intro"
@@ -26,7 +35,7 @@ export const Register = () => {
           </div>
           <div className="form__register">
             <div className="form__header">
-              <img src={icon_close_menu} alt="" />
+              <img src={icon_close_menu} alt="" onClick={closeRegister} />
             </div>
             <Formik
               initialValues={initialValues}
@@ -62,6 +71,7 @@ export const Register = () => {
                       name="password"
                       placeholder="Mật khẩu"
                       className="input"
+                      type="password"
                     />
                     {errors.password && touched.password ? (
                       <div className="formError">{errors.password}</div>
@@ -72,6 +82,7 @@ export const Register = () => {
                       name="confimlPassword"
                       placeholder="Nhập lại mật khẩu"
                       className="input"
+                      type="password"
                     />
                     {errors.password && touched.password ? (
                       <div className="formError">{errors.password}</div>

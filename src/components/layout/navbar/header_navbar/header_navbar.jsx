@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header_navbar.scss";
-const Header_navbar = () => {
+const Header_navbar = (prop) => {
+
+  const register =  () =>{
+    prop.passCheckRegister(true);
+  }
+  
+  const login = () =>{
+    prop.passCheckLogin(true);
+  }
   return (
     <div className="header__container">
       <div className="header__main">
@@ -11,9 +19,9 @@ const Header_navbar = () => {
         <div className="col right">
           <p>Việt Nam</p>
           <span></span>
-          <p>Đăng ký</p>
+          <p onClick={register}>Đăng ký</p>
           <span></span>
-          <p>Đăng nhập</p>
+          <p onClick={login}>Đăng nhập</p>
         </div>
       </div>
     </div>

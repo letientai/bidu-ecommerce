@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header_navbar from "./header_navbar/header_navbar.jsx";
 import "../layout.scss";
 import logo from "../../../assets/img/logo.png";
@@ -10,16 +10,52 @@ import icon_shopping from "../../../assets/icon/icon_shopping-active.svg";
 import chat_normal from "../../../assets/icon/chat_normal.svg";
 import { Login } from "../../login/login.jsx";
 import { Register } from "../../register/register.jsx";
-export const Navbar = () => {
+export const Navbar = (prop) => {
+  const [checkRegister, setCheckRegister] = useState(false);
+  const [checkLogin, setCheckLogin] = useState(false);
+
+  const passCheckRegister = (check) => {
+    if (check) {
+      setCheckRegister(true);
+    }
+  };
+
+  const closeRegister = (check) => {
+    if (!check) {
+      setCheckRegister(false);
+    }
+  };
+
+  const passCheckLogin = (check) => {
+    if (check) {
+      setCheckLogin(true);
+    }
+  };
+
+  const closeLogin = (check) => {
+    if (!check) {
+      setCheckLogin(false);
+    }
+  };
+
+  const openRegister = (check) =>{
+    if (check) {
+      setCheckLogin(false);
+      setCheckRegister(true)
+    }
+  }
   return (
     <div>
       <div className="login">
-        {/* <Register/> */}
-        {/* <Login/> */}
+        {checkRegister && <Register closeRegister={closeRegister} />}
+        {checkLogin && <Login closeLogin={closeLogin} openRegister={openRegister}/>}
       </div>
       <div className="navbar_container">
         <div className="header">
-          <Header_navbar />
+          <Header_navbar
+            passCheckRegister={passCheckRegister}
+            passCheckLogin={passCheckLogin}
+          />
         </div>
         <div className="main">
           <div className="content_main">
