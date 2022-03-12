@@ -1,5 +1,5 @@
 import React from "react";
-import { DataCarousel } from "../../assets/data-carousel/dataCarousel";
+import {DataCarousel} from '../../assets/data-carousel/dataCarousel'
 import Slider from "react-slick";
 import "./carousel.scss";
 export const Carousel = () => {
