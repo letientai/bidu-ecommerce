@@ -1,0 +1,17 @@
+.topProduct {
+  width: 300px;
+  background-color: white;
+  &_header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: 100%;
+    h3 {
+      padding: 8px;
+      margin: 0;
+    }
+  }
+  &_products{
+      width: 100%;
+  }
+}
