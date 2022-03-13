@@ -1,0 +1,31 @@
+.card {
+  width: 90%;
+  margin: 10px auto;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  cursor: pointer;
+  img {
+    width: 120px;
+    height: 120px;
+  }
+  .inf {
+    overflow: hidden;
+    p {
+      display: -webkit-box;
+      font-size: 16px;
+      line-height: 1.3;
+      -webkit-line-clamp: 2; /* số dòng hiển thị */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0px auto;
+      padding-left: 10px;
+    }
+  }
+  &:hover {
+    box-shadow: 0px 0px 3px -19px rgba(0, 0, 0, 0.263),
+      0px 0px 10.1px -19px rgba(0, 0, 0, 0.387),
+      0px 0px 45px -19px rgba(0, 0, 0, 0.65);
+  }
+}
