@@ -1,31 +1,41 @@
 //NAVBAR
-
-.login{
+.navbar{
+  position: relative;
+}
+.login {
   position: absolute;
 }
-.content_main {
-  width: 83%;
-  max-width: 1350px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
-  .logo {
-    width: 100px;
-    img {
-      width: 100%;
-    }
-  }
-  .search {
-    width: 50%;
-    height: 42px;
-  }
-  .option {
-    width: 20%;
-    img{
-        width: 19px;
-        margin: 5px 12px;
-        cursor: pointer;
+.navbar_container {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+  .main {
+    .content_main {
+      width: 83%;
+      max-width: 1350px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      .logo {
+        width: 100px;
+        img {
+          width: 100%;
+        }
+      }
+      .search {
+        width: 50%;
+        height: 42px;
+      }
+      .option {
+        width: 20%;
+        img {
+          width: 19px;
+          margin: 5px 12px;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

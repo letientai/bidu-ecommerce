@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header_navbar from "./header_navbar/header_navbar.jsx";
+import HeaderNavbar from "./header_navbar/header_navbar.jsx";
 import "../layout.scss";
 import logo from "../../../assets/img/logo.png";
 import { Search } from "./search/search";
@@ -44,15 +44,16 @@ export const Navbar = (prop) => {
       setCheckRegister(true)
     }
   }
+
   return (
-    <div>
+    <div className="navbar">
       <div className="login">
         {checkRegister && <Register closeRegister={closeRegister} />}
         {checkLogin && <Login closeLogin={closeLogin} openRegister={openRegister}/>}
       </div>
       <div className="navbar_container">
         <div className="header">
-          <Header_navbar
+          <HeaderNavbar
             passCheckRegister={passCheckRegister}
             passCheckLogin={passCheckLogin}
           />
