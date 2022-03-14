@@ -3,6 +3,8 @@ import { DataTopSeller } from "../../../assets/data-topSeller/dataSeller";
 import "./topSeller.scss";
 import Slider from "react-slick";
 import heart from "./shop-heart.svg";
+import { Card } from "./card/card";
+import { DataNewProduct } from "../../../assets/data-newProduct/dataNewProduct";
 export const TopSeller = () => {
   var settings = {
     dots: false,
@@ -69,6 +71,15 @@ export const TopSeller = () => {
       },
     ],
   };
+  var settings1 = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 1,
+    arrows: true,
+  };
   return (
     <div className="content">
       <div className="topSeller">
@@ -92,6 +103,18 @@ export const TopSeller = () => {
                   <p>{item.text}</p>
                 </div>
               </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+      <div className="newProduct">
+        <div className="newProduct_header">
+          <h3>SẢN PHẨM MỚI NHẤT</h3>
+        </div>
+        <div className="newProduct_content">
+          <Slider {...settings1}>
+            {DataNewProduct.map((item, index) => (
+              <Card key={index} item={item} />
             ))}
           </Slider>
         </div>

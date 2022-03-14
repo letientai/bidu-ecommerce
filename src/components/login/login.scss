@@ -1,6 +1,8 @@
 .container {
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
   .outsite {
     position: fixed;
     z-index: 2;
@@ -14,7 +16,6 @@
     display: flex;
     background-color: white;
     width: 60%;
-    height: 480px;
     left: 20%;
     top: 40px;
     .intro {

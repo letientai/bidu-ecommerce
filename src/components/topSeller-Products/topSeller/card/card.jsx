@@ -2,10 +2,14 @@ import React from "react";
 import "./card.scss";
 export const Card = (props) => {
   const data = props.item;
-
   return (
-    <div className="cardTopProduct">
-      <img src={data.image} alt="" />
+    <div className="cardTopNewProduct">
+      <div className="image">
+        <img src={data.image} alt="" />
+      </div>
+      <div className="company">
+        <span>Chính hãng</span>
+      </div>
       <div className="inf">
         <p>{data.name}</p>
         <b>{data.price}đ</b>

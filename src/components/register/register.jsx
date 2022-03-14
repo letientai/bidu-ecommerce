@@ -11,13 +11,17 @@ export const Register = (prop) => {
     username: "",
     email: "",
     password: "",
-    confimlPassword: "",
+    password_confirm: "",
     phone: "",
   };
 
   const closeRegister = () => {
     prop.closeRegister(false);
   };
+
+  const onRegister = () =>{
+    console.log(1);
+  }
   return (
     <div>
       <div className="container">
@@ -40,7 +44,7 @@ export const Register = (prop) => {
             <Formik
               initialValues={initialValues}
               validationSchema={RegisterSchema}
-              //   onSubmit={onAdd}
+                onSubmit={onRegister}
             >
               {({ errors, touched }) => (
                 <Form className="form_fields">
@@ -62,8 +66,8 @@ export const Register = (prop) => {
                       placeholder="Email"
                       className="input"
                     />
-                    {errors.password && touched.password ? (
-                      <div className="formError">{errors.password}</div>
+                    {errors.email && touched.email ? (
+                      <div className="formError">{errors.email}</div>
                     ) : null}
                   </div>
                   <div className="field">
@@ -79,13 +83,13 @@ export const Register = (prop) => {
                   </div>
                   <div className="field">
                     <FastField
-                      name="confimlPassword"
+                      name="password_confirm"
                       placeholder="Nhập lại mật khẩu"
                       className="input"
                       type="password"
                     />
-                    {errors.password && touched.password ? (
-                      <div className="formError">{errors.password}</div>
+                    {errors.password_confirm && touched.password_confirm ? (
+                      <div className="formError">{errors.password_confirm}</div>
                     ) : null}
                   </div>
                   <div className="field">
@@ -94,8 +98,8 @@ export const Register = (prop) => {
                       placeholder="Số điện thoại"
                       className="input"
                     />
-                    {errors.password && touched.password ? (
-                      <div className="formError">{errors.password}</div>
+                    {errors.phone && touched.phone ? (
+                      <div className="formError">{errors.phone}</div>
                     ) : null}
                   </div>
                   <div className="field">
