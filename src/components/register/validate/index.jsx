@@ -16,7 +16,7 @@ export const RegisterSchema = Yup.object().shape({
   // .matches(
   //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+])/,
   //   "Mật Khẩu phải từ 8-16 kí tự, bao gồm chữ cái in hoa, chữ cái in thường, ký tự đặc biệt và con số."
-  // )
+  // ),
   password_confirm: Yup.string()
     .required(" ")
     .oneOf([Yup.ref("password"), null], "Không trùng"),

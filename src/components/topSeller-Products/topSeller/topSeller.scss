@@ -3,6 +3,7 @@
   .topSeller {
     width: 100%;
     background-color: white;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.07);
     &_header {
       background-color: black;
       color: white;
@@ -69,9 +70,10 @@
     }
   }
   .newProduct {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.07);
     margin-top: 20px;
     width: 100%;
-    padding: 10px;
+    padding: 10px 0;
     background-color: white;
     &_header {
       width: 100%;
@@ -83,6 +85,10 @@
         font-weight: 600;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
+    }
+    .slide{
+      width: 97%;
+      margin: auto;
     }
   }
 }

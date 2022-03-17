@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./header_navbar.scss";
-const Header_navbar = (prop) => {
+const HeaderNavbar = (prop) => {
 
   const register =  () =>{
     prop.passCheckRegister(true);
@@ -28,4 +28,4 @@ const Header_navbar = (prop) => {
   );
 };
 
-export default Header_navbar;
+export default HeaderNavbar;
