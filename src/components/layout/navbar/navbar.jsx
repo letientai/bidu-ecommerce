@@ -10,9 +10,11 @@ import icon_shopping from "../../../assets/icon/icon_shopping-active.svg";
 import chat_normal from "../../../assets/icon/chat_normal.svg";
 import { Login } from "../../login/login.jsx";
 import { Register } from "../../register/register.jsx";
+import { useNavigate } from "react-router-dom";
 export const Navbar = (prop) => {
   const [checkRegister, setCheckRegister] = useState(false);
   const [checkLogin, setCheckLogin] = useState(false);
+  const navigate = useNavigate()
 
   const passCheckRegister = (check) => {
     if (check) {
@@ -45,6 +47,10 @@ export const Navbar = (prop) => {
     }
   }
 
+  const moveToHome = () =>{
+    navigate("/")
+  }
+
   return (
     <div className="navbar">
       <div className="login">
@@ -60,7 +66,7 @@ export const Navbar = (prop) => {
         </div>
         <div className="main">
           <div className="content_main">
-            <div className="logo">
+            <div className="logo" onClick={moveToHome}>
               <img src={logo} alt="" />
             </div>
             <div className="search">

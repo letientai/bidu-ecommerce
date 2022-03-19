@@ -1,5 +1,5 @@
 .container {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   width: 100%;
   .Home_content {
     padding-top: 110px;
@@ -15,11 +15,13 @@
       width: 83%;
       margin: 10px auto;
     }
-    .content1 {
+    .Content {
       width: 83%;
       margin: 20px auto;
-      display: flex;
-      justify-content: space-between;
+      &_1 {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 }

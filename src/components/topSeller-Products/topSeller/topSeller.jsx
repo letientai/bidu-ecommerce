@@ -11,64 +11,64 @@ export const TopSeller = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     initialSlide: 1,
     arrows: true,
     responsive: [
       {
-        //   breakpoint: 475,
-        //   settings: {
-        //     slidesToShow: 2,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
-        // },
-        // {
-        //   breakpoint: 540,
-        //   settings: {
-        //     slidesToShow: 4,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
-        // },
-        // {
-        //   breakpoint: 767,
-        //   settings: {
-        //     slidesToShow: 5,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
-        // },
-        // {
-        //   breakpoint: 991,
-        //   settings: {
-        //     slidesToShow: 7,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
-        // },
-        // {
-        //   breakpoint: 1200,
-        //   settings: {
-        //     slidesToShow: 10,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
-        // },
-        // {
-        //   breakpoint: 1800,
-        //   settings: {
-        //     slidesToShow: 12,
-        //     initialSlide: 0,
-        //     slidesToScroll: 1,
-        //     infinite: true,
-        //   },
+        breakpoint: 475,
+        settings: {
+          slidesToShow: 2,
+          initialSlide: 0,
+          slidesToScroll: 1,
+          infinite: true,
+        },
       },
+      {
+        breakpoint: 540,
+        settings: {
+          slidesToShow: 4,
+          initialSlide: 0,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      // {
+      //   breakpoint: 767,
+      //   settings: {
+      //     slidesToShow: 5,
+      //     initialSlide: 0,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //   },
+      // },
+      // {
+      //   breakpoint: 991,
+      //   settings: {
+      //     slidesToShow: 7,
+      //     initialSlide: 0,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //   },
+      // },
+      // {
+      //   breakpoint: 1200,
+      //   settings: {
+      //     slidesToShow: 10,
+      //     initialSlide: 0,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //   },
+      // },
+      // {
+      //   breakpoint: 1800,
+      //   settings: {
+      //     slidesToShow: 12,
+      //     initialSlide: 0,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //   },
+      // },
     ],
   };
   var settings1 = {
@@ -112,11 +112,13 @@ export const TopSeller = () => {
           <h3>SẢN PHẨM MỚI NHẤT</h3>
         </div>
         <div className="newProduct_content">
-          <Slider {...settings1}>
-            {DataNewProduct.map((item, index) => (
-              <Card key={index} item={item} />
-            ))}
-          </Slider>
+          <div className="slide">
+            <Slider {...settings1}>
+              {DataNewProduct.map((item, index) => (
+                <Card key={index} item={item} />
+              ))}
+            </Slider>
+          </div>
         </div>
       </div>
     </div>

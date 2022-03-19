@@ -1,0 +1,22 @@
+.Category {
+  &_header {
+    padding: 20px;
+    border-bottom: 2px solid #ffffff;
+    p {
+      margin: 0;
+    }
+  }
+  &_content {
+    padding: 0 20px;
+    p {
+      margin: 25px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 500 !important;
+      color: #7c7c7c;
+      cursor: pointer;
+      &:hover {
+        color: #474747;
+      }
+    }
+  }
+}
