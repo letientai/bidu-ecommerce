@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-export const SignupSchema = Yup.object().shape({
+export const LoginSchema = Yup.object().shape({
   password: Yup.string()
     .required("Bắt buộc")
     .min(6, "Tối thiểu 6 ký tự")

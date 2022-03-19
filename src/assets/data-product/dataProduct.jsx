@@ -22,7 +22,13 @@ import product21 from "./img/product21.jpeg";
 import product22 from "./img/product22.jpg";
 import product23 from "./img/product23.jpg";
 import product24 from "./img/product24.jpeg";
-
+import newproduct1 from "./img/newproduct1.jpg";
+import newproduct2 from "./img/newproduct2.jpg";
+import newproduct3 from "./img/newproduct3.jpeg";
+import newproduct4 from "./img/newproduct4.jpeg";
+import newproduct5 from "./img/newproduct5.jpg";
+import newproduct6 from "./img/newproduct6.png";
+import newproduct7 from "./img/newproduct7.jpeg";
 export const DataProduct = [
   {
     id: 1,
@@ -57,73 +63,73 @@ export const DataProduct = [
   {
     id: 6,
     name: "뾰족한 발가락 발 뒤꿈치",
-    image: product6,
+    image: newproduct1,
     price: 120000,
   },
   {
     id: 7,
     name: "Áo sweater",
-    image: product7,
+    image: newproduct2,
     price: 220000,
   },
   {
     id: 8,
     name: "파티 용 하이힐 💕💕 ",
-    image: product8,
+    image: newproduct3,
     price: 210000,
   },
   {
     id: 9,
     name: "스타일 셔츠 ❤️❤️❤️",
-    image: product9,
+    image: newproduct4,
     price: 240000,
   },
   {
     id: 10,
     name: "Sản phẩm có cài authorized",
-    image: product10,
+    image: newproduct5,
     price: 170000,
   },
   {
     id: 11,
     name: "Sản phẩm có cài authorized",
-    image: product11,
+    image: newproduct6,
     price: 170000,
   },
   {
     id: 12,
     name: "Sản phẩm có cài authorized",
-    image: product12,
+    image: newproduct7,
     price: 170000,
   },
   {
     id: 13,
     name: "뾰족한 발가락 발 뒤꿈치",
-    image: product13,
+    image: product6,
     price: 120000,
   },
   {
     id: 14,
     name: "Áo sweater",
-    image: product14,
+    image: product7,
     price: 220000,
   },
   {
     id: 15,
     name: "파티 용 하이힐 💕💕 ",
-    image: product15,
+    image: product8,
     price: 210000,
   },
   {
     id: 16,
     name: "스타일 셔츠 ❤️❤️❤️",
-    image: product16,
+    image: product9,
     price: 240000,
   },
   {
     id: 17,
     name: "Sản phẩm có cài authorized",
-    image: product17,
+    image: product10,
     price: 170000,
   },
   {
@@ -167,5 +173,47 @@ export const DataProduct = [
     name: "스타일 셔츠 ❤️❤️❤️",
     image: product24,
     price: 240000,
+  },
+  {
+    id: 25,
+    name: "Sản phẩm có cài authorized",
+    image: product11,
+    price: 170000,
+  },
+  {
+    id: 26,
+    name: "Sản phẩm có cài authorized",
+    image: product12,
+    price: 170000,
+  },
+  {
+    id: 27,
+    name: "뾰족한 발가락 발 뒤꿈치",
+    image: product13,
+    price: 120000,
+  },
+  {
+    id: 28,
+    name: "Áo sweater",
+    image: product14,
+    price: 220000,
+  },
+  {
+    id: 29,
+    name: "파티 용 하이힐 💕💕 ",
+    image: product15,
+    price: 210000,
+  },
+  {
+    id: 30,
+    name: "스타일 셔츠 ❤️❤️❤️",
+    image: product16,
+    price: 240000,
+  },
+  {
+    id: 31,
+    name: "Sản phẩm có cài authorized",
+    image: product17,
+    price: 170000,
   },
 ];

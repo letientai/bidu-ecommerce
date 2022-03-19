@@ -3,6 +3,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  .loading{
+    position: fixed;
+    z-index: 4;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    &_progress{
+      margin-top: 200px;
+    }
+  }
   .outsite {
     position: fixed;
     z-index: 2;
