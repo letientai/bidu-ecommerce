@@ -92,7 +92,7 @@ export const DataProduct = [
   },
   {
     id: 11,
-    name: "Sản phẩm có cài authorized",
+    name: "Áo thun bảng chữ số unisex - Phông cộc tay suông oversize in hình họa tiết nổi bật, cá tính",
     image: newproduct6,
     price: 170000,
   },
@@ -116,7 +116,7 @@ export const DataProduct = [
   },
   {
     id: 15,
-    name: "파티 용 하이힐 💕💕 ",
+    name: "Váy gấm hở lưng hoạ tiết nổi tay bồng xinh xắn 💕💕 ",
     image: product8,
     price: 210000,
   },
@@ -152,7 +152,7 @@ export const DataProduct = [
   },
   {
     id: 21,
-    name: "스타일 셔츠 ❤️❤️❤️",
+    name: "[Lajun] Váy line cột eo Navy❤️❤️❤️",
     image: product21,
     price: 240000,
   },
@@ -176,13 +176,13 @@ export const DataProduct = [
   },
   {
     id: 25,
-    name: "Sản phẩm có cài authorized",
+    name: "Váy gấm hở lưng hoạ tiết nổi tay bồng xinh xắn",
     image: product11,
     price: 170000,
   },
   {
     id: 26,
-    name: "Sản phẩm có cài authorized",
+    name: "Áo thun bảng chữ số unisex - Phông cộc tay suông oversize in hình họa tiết nổi bật, cá tính💕❤️",
     image: product12,
     price: 170000,
   },
