@@ -3,6 +3,7 @@ import "./header_navbar.scss";
 const HeaderNavbar = (prop) => {
   const currenUser = localStorage.getItem("customerName");
   const [textLogin, setTextLogin] = useState("Đăng nhập");
+  
   const register = () => {
     prop.passCheckRegister(true);
   };
@@ -14,6 +15,7 @@ const HeaderNavbar = (prop) => {
   const logOut = () => {
     localStorage.clear();
     setTextLogin("Đăng nhập");
+    prop.checkLogout(true)
   };
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const HeaderNavbar = (prop) => {
       setTextLogin("Đăng xuất");
     }
   },[currenUser]);
+
   return (
     <div className="header__container">
       <div className="header__main">

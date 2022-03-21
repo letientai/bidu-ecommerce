@@ -15,7 +15,7 @@ const axios = require("axios");
 
 export const Login = (prop) => {
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(false);
+  // const [alert, setAlert] = useState(false);
   const initialValues = {
     username: "",
     password: "",
@@ -39,7 +39,6 @@ export const Login = (prop) => {
       .post("https://lap-center.herokuapp.com/api/login", {
         username: values.username,
         password: values.password,
-        
       })
       .then(function (response) {
         setLoading(false);
@@ -50,16 +49,6 @@ export const Login = (prop) => {
       })
       .catch(function (error) {
         setLoading(false);
-        // setAlert(true);
-        // const myTimeout = setTimeout(setAlert(false), 1000);
-        // setTimeout((
-        //   setAlert(false)
-        // ), 1000)
-        // clearTimeout(myTimeout)
-        // function myStopFunction() {
-        //   clearTimeout(myTimeout);
-        // }
-        // myStopFunction();
       });
   };
   return (

@@ -1,12 +1,13 @@
 import "./App.css";
 import { Routerr } from "./router/router";
+import { memo } from "react";
 
 function App() {
   return (
     <div>
-      <Routerr/>
+      <Routerr />
     </div>
   );
 }
 
-export default App;
+export default memo(App);
