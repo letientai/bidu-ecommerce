@@ -43,6 +43,7 @@ export const HomeSearch = () => {
             {data?.map((item, index) =>(
               <Card key={index} item={item}/>
             ))}
+            {data.length === 0 && <h3>Không tìm thấy sản phẩm nào!!!</h3> }
           </div>
         </div>
       </div>
