@@ -10,7 +10,6 @@ const InitState = {
   setStateCount: 0,
 };
 function Reducer(state, action) {
-  let sum = 0;
   switch (action.type) {
     case SET_CART_PRODUCT:
       const products = state.cartProduct;
@@ -27,7 +26,7 @@ function Reducer(state, action) {
       Products.forEach((element, index) => {
         if (element.id === action.payload.id) {
           Products.splice(index, 1, action.payload);
-          setCount = Products[index].count
+          setCount = Products[index].count;
         }
       });
       console.log(setCount);

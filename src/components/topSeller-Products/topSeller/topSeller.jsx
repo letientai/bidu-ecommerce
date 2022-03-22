@@ -33,42 +33,6 @@ export const TopSeller = () => {
           infinite: true,
         },
       },
-      // {
-      //   breakpoint: 767,
-      //   settings: {
-      //     slidesToShow: 5,
-      //     initialSlide: 0,
-      //     slidesToScroll: 1,
-      //     infinite: true,
-      //   },
-      // },
-      // {
-      //   breakpoint: 991,
-      //   settings: {
-      //     slidesToShow: 7,
-      //     initialSlide: 0,
-      //     slidesToScroll: 1,
-      //     infinite: true,
-      //   },
-      // },
-      // {
-      //   breakpoint: 1200,
-      //   settings: {
-      //     slidesToShow: 10,
-      //     initialSlide: 0,
-      //     slidesToScroll: 1,
-      //     infinite: true,
-      //   },
-      // },
-      // {
-      //   breakpoint: 1800,
-      //   settings: {
-      //     slidesToShow: 12,
-      //     initialSlide: 0,
-      //     slidesToScroll: 1,
-      //     infinite: true,
-      //   },
-      // },
     ],
   };
   var settings1 = {

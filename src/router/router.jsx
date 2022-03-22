@@ -20,7 +20,7 @@ export const Routerr = (prop) => {
             <Route path="/" element={<Home />} />
             <Route path="/tim-kiem/keyword=:search" element={<HomeSearch />} />
             <Route path="/san-pham/:id" element={<DetailProduct checklogin={checklogin}/>} />
-            <Route path="/san-pham/:id" element={<Cart/>} />
+            <Route path="/gio-hang" element={<Cart/>} />
           </Routes>
         </Router>
       </StoreProvider>
