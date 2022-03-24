@@ -5,11 +5,14 @@ import { Card } from "./card/card";
 import { useNavigate } from "react-router-dom";
 export const Cart = () => {
   const [state] = UseStore();
-  const { cartProduct, countProduct } = state;
+  const { cartProduct } = state;
   const currenUser = localStorage.getItem("customerName");
   const navigate = useNavigate();
 
   const moveToCart = () => {
+    cartProduct.forEach(element => {
+      element.checkBuyNow = false;
+    });
     navigate("/gio-hang");
   };
   return (
@@ -26,7 +29,7 @@ export const Cart = () => {
       </div>
       {currenUser && (
         <div className="menu__Cart__btn" onClick={moveToCart}>
-          <h4>Xem giỏ hàng ({countProduct})</h4>
+          <h4>Xem giỏ hàng ({cartProduct.length})</h4>
         </div>
       )}
     </div>

@@ -61,6 +61,7 @@ export const DetailProduct = (checklogin) => {
         const product = products.filter((x) => x.id === mainData.id);
         if (product.length === 0) {
           mainData.count = count;
+          mainData.checkBuyNow = false
           dispatch(action.SetCartProduct(mainData));
         } else {
           mainData.count = mainData.count + count;

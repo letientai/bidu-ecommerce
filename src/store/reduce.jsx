@@ -3,11 +3,14 @@ import {
   SET_CART_PRODUCT,
   SET_COUNT_CART,
   SET_CART_PRODUCT_ID,
+  DELETE_PRODUCT_CART,
+  HANDLE_CHECKOUT,
 } from "./constants";
 const InitState = {
   cartProduct: [],
   countProduct: 0,
   setStateCount: 0,
+  dataCheckout: [],
 };
 function Reducer(state, action) {
   switch (action.type) {
@@ -44,7 +47,28 @@ function Reducer(state, action) {
       return {
         ...state,
       };
-
+    case DELETE_PRODUCT_CART:
+      var deleteProduct = state.cartProduct;
+      const remainingProducts = deleteProduct.filter(
+        (x) => x.id !== action.payload.id
+      );
+      console.log("aa", remainingProducts);
+      if (remainingProducts.length === 0) {
+        var remaining = 0;
+      }
+      return {
+        ...state,
+        cartProduct: remainingProducts,
+        countProduct: remaining,
+      };
+    case HANDLE_CHECKOUT:
+      const datacheckout = state.cartProduct.filter(
+        (x) => x.checkBuyNow === true
+      );
+      return {
+        ...state,
+        dataCheckout: datacheckout
+      };
     default:
       throw new Error("Invalid action.");
   }

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./header_navbar.scss";
+import {useNavigate} from "react-router-dom"
 const HeaderNavbar = (prop) => {
   const currenUser = localStorage.getItem("customerName");
   const [textLogin, setTextLogin] = useState("Đăng nhập");
-  
+  const navigate = useNavigate()
+
   const register = () => {
     prop.passCheckRegister(true);
   };
@@ -16,6 +18,7 @@ const HeaderNavbar = (prop) => {
     localStorage.clear();
     setTextLogin("Đăng nhập");
     prop.checkLogout(true)
+    navigate("/")
   };
 
   useEffect(() => {

@@ -27,7 +27,7 @@
       width: 83%;
       margin: auto;
       padding: 30px 0;
-      .cart-title {
+      .title{
         img {
           width: 20px;
         }
@@ -43,57 +43,38 @@
       .list-table {
         margin-top: 30px;
         width: 100%;
-        // .cart-item {
-        //   margin-top: 5px;
-        //   width: 100%;
-        //   background-color: #f1f1f1;
-        //   display: flex;
-        //   padding: 25px 20px;
-        //   border-radius: 5px;
-        //   .image {
-        //     width: 120px;
-        //     img {
-        //       width: 100%;
-        //       border-radius: 10px;
-        //       height: 120px;
-        //     }
-        //   }
-        //   .name {
-        //     margin-left: 20px;
-        //     width: 40%;
-        //     p {
-        //       margin: 0;
-        //       font-size: 15px;
-        //       font-weight: 900;
-        //       font-family: "Roboto", sans-serif;
-        //     }
-        //   }
-        //   .amount {
-        //     display: flex;
-        //     padding: 40px 30px;
-        //     // background-color: #3a3a3a;
-        //     span {
-        //       margin: 5px 15px 5px 0;
-        //     }
-        //     p {
-        //       margin: 5px 20px;
-        //     }
-        //     .btn_amount {
-        //       border: 0.5px solid rgb(150, 150, 150);
-        //       width: 30px;
-        //       height: 30px;
-        //       text-align: center;
-        //       border-radius: 50%;
-        //       cursor: pointer;
-        //       .icon_amount {
-        //         margin-top: 10px;
-        //       }
-        //     }
-        //     .plus {
-        //       background-color: black;
-        //     }
-        //   }
-        // }
+      }
+      .cart-actions{
+        margin-top: 30px;
+        background-color: #f4f4f4;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .checkAll{
+          width: 30%;
+          padding: 30px;
+          display: flex;
+          p{
+            padding: 0px 15px;
+            margin: 0;
+          }
+        }
+        .checkout{
+          padding: 50px 50px 20px 10px;
+          span{
+            font-family: "Roboto", sans-serif;
+            padding: 3px;
+          }
+          button{
+            margin-left: 20px;
+            cursor: pointer;
+            background-color: #191919;
+            width: 200px;
+            height: 45px;
+            color: white;
+            border: none;
+          }
+        }
       }
     }
   }
