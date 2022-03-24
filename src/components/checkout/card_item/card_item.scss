@@ -1,0 +1,61 @@
+.Checkout-card-item {
+  margin-top: 5px;
+  width: 100%;
+  background-color: #f4f4f4;
+  display: flex;
+  border-radius: 5px;
+  .image {
+    padding: 20px;
+    width: 100px;
+    img {
+      width: 100%;
+      height: 100px;
+      border-radius: 5px;
+    }
+  }
+  .name {
+    padding: 20px 0;
+    font-family: "Roboto", sans-serif;
+    width: 40%;
+    p {
+      margin: 0;
+      font-weight: bold;
+    }
+    b {
+      line-height: 2.5;
+      font-size: 15px;
+      font-weight: 400;
+    }
+  }
+  .amount {
+    padding: 20px;
+    text-align: center;
+    width: 20%;
+    max-width: 150px;
+    font-family: "Roboto", sans-serif;
+    b {
+      font-size: 22px;
+    }
+    p {
+      font-weight: 500;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+  }
+  .priceTotal {
+    padding: 20px;
+    text-align: center;
+    width: 25%;
+    font-family: "Roboto", sans-serif;
+    b {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fd37ae;
+    }
+    p {
+      font-weight: 500;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+  }
+}

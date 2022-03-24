@@ -3,11 +3,15 @@ import "./cart_item.scss";
 import minus_grey from "../../../assets/img/minus_grey.svg";
 import plus_white from "../../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../../store";
-export const Cart_item = (prop) => {
+import CheckBox from "react-animated-checkbox";
+
+export const CartItem = (prop) => {
   const item = prop.item;
   const [count, setCount] = useState(item.count);
   const [state, dispatch] = UseStore();
   const { cartProduct } = state;
+  const [check, setCheck] = useState(false);
+
   const handleCount = (check) => {
     if (check === "plus") {
       item.count = count + 1;
@@ -19,9 +23,35 @@ export const Cart_item = (prop) => {
     setCount(item.count);
     dispatch(action.SetCountCart());
   };
+
+  const handleDelete = () => {
+    dispatch(action.DeleteProductToCart(item));
+    console.log(cartProduct);
+  };
+
+  const handleClick = () => {
+    setCheck(!check);
+    if (check !== true) {
+      item.checkBuyNow = true;
+    } else {
+      item.checkBuyNow = false;
+    }
+    prop.checkout();
+  };
   return (
     <div className="cart-item">
-      <div className="check"></div>
+      <div className="check">
+        <CheckBox
+          checked={check}
+          checkBoxStyle={{
+            checkedColor: "#191919",
+            size: 20,
+            unCheckedColor: "#191919",
+          }}
+          duration={70}
+          onClick={handleClick}
+        />
+      </div>
       <div className="image">
         <img src={item.image} alt="" />
       </div>
@@ -40,9 +70,7 @@ export const Cart_item = (prop) => {
         </div>
       </div>
       <div className="btn_delete">
-          <button>
-              Xóa
-          </button>
+        <button onClick={handleDelete}>Xóa</button>
       </div>
     </div>
   );

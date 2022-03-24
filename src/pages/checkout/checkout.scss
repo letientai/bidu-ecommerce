@@ -1,0 +1,84 @@
+.Checkout {
+  background-color: #fafafa;
+  width: 100%;
+  &_header {
+    padding-top: 110px;
+    width: 100%;
+    &_content {
+      max-width: 1350px;
+      display: flex;
+      width: 83%;
+      margin: auto;
+      p {
+        margin: 22px 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #888888;
+      }
+      img {
+        margin: 22px;
+      }
+    }
+  }
+  &_content {
+    background-color: #ffffff;
+    width: 100%;
+    .main {
+      max-width: 1350px;
+      width: 83%;
+      margin: auto;
+      padding: 30px 0;
+      .title {
+        img {
+          width: 20px;
+        }
+        span {
+          font-size: 20px;
+          color: #3a3a3a;
+          line-height: 0.8;
+          font-weight: 600;
+          margin: 7px;
+        }
+      }
+      .order-info {
+        margin-top: 20px;
+        &-header {
+          background-color: #f4f4f4;
+          padding: 20px 0;
+          border-radius: 5px;
+          span {
+            padding: 20px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 900;
+          }
+        }
+        .system-vouchers {
+          background-color: #f4f4f4;
+          padding: 20px 0;
+          border-radius: 5px;
+          margin-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          .title {
+            display: flex;
+            img {
+              width: 20px;
+              padding-left: 20px;
+            }
+            p {
+              margin: 0;
+              padding: 5px;
+              font-family: "Roboto", sans-serif;
+              font-weight: 900;
+            }
+          }
+          .action-vouchers {
+            color: #fd37ae;
+            margin-right: 20px;
+            font-weight: 500;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

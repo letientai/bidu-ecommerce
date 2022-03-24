@@ -34,7 +34,7 @@ export const Option = () => {
           <div className="menuCart">
             <Cart />
           </div>
-          {currenUser && <div className="amountProduct">{countProduct}</div>}
+          {currenUser && <div className="amountProduct">{cartProduct.length}</div>}
           <img src={icon_cart} alt="" />
         </div>
       </div>
