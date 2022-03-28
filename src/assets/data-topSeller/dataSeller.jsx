@@ -29,5 +29,6 @@ export const DataTopSeller = [
     name: "미니 쇼핑 🛍",
     image: avt,
     text: '3 nghìn lượt theo dõi'
-  }
+  },
+  
 ];

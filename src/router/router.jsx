@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navbar } from "../components/layout/navbar/navbar";
 import { Cart } from "../pages/cart/cart";
 import { Checkout } from "../pages/checkout/checkout";
+import { Community } from "../pages/community/community";
 import { DetailProduct } from "../pages/detail/detailProduct";
 import { Home } from "../pages/home/home";
 import { HomeSearch } from "../pages/homeSearch/homeSearch";
@@ -18,7 +19,7 @@ export const Routerr = (prop) => {
         <Router>
           <Navbar checkLogin={checkLogin} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/bidu-ecommerce" element={<Home />} />
             <Route path="/tim-kiem/keyword=:search" element={<HomeSearch />} />
             <Route
               path="/san-pham/:id"
@@ -26,6 +27,7 @@ export const Routerr = (prop) => {
             />
             <Route path="/gio-hang" element={<Cart />} />
             <Route path="/thanh-toan" element={<Checkout />} />
+            <Route path="/cong-dong" element={<Community />} />
           </Routes>
         </Router>
       </StoreProvider>

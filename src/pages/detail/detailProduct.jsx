@@ -7,6 +7,8 @@ import minus_grey from "../../assets/img/minus_grey.svg";
 import plus_white from "../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../store";
 import { Alert } from "@mui/material";
+import {useNavigate} from "react-router-dom"
+
 export const DetailProduct = (checklogin) => {
   const location = useLocation();
   const id = location.pathname.split("san-pham/")[1];
@@ -21,12 +23,17 @@ export const DetailProduct = (checklogin) => {
   const [state, dispatch] = UseStore();
   const { cartProduct } = state;
   const currenUser = localStorage.getItem("customerName");
+  const navigate = useNavigate()
+
   const fetchData = () => {
     var data = DataProduct.filter((x) => x.id === Number(id))[0];
     setName(data?.name || "");
     setImage(data?.image || "");
     setPrice(data?.price || 0);
     setMainData(data);
+    cartProduct.forEach(element => {
+      element.checkBuyNow = false;
+    });
   };
 
   const handleCount = (check) => {
@@ -80,7 +87,8 @@ export const DetailProduct = (checklogin) => {
     }, 2000);
   };
   const buyNow = () => {
-    console.log("mang", cartProduct);
+    navigate("/thanh-toan")
+    // mainData.checkBuyNow=true;
   };
   return (
     <div className="detailProduct">

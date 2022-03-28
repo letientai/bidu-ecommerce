@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./register.scss";
 import { Formik, FastField, Form } from "formik";
 import auth_background from "../../assets/img-login/auth_background.svg";
@@ -6,7 +6,14 @@ import text_bidu from "../../assets/img-login/text_bidu.svg";
 import Cursor from "../../assets/img/cursor.png";
 import icon_close_menu from "../../assets/img-login/icon_close_menu.svg";
 import { RegisterSchema } from "./validate";
+import { Alert, CircularProgress } from "@mui/material";
+const axios = require("axios");
+
 export const Register = (prop) => {
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [message, setMessage] = useState("");
+
   const initialValues = {
     username: "",
     email: "",
@@ -19,12 +26,52 @@ export const Register = (prop) => {
     prop.closeRegister(false);
   };
 
-  const onRegister = () =>{
-    console.log(1);
-  }
+  const onAdd = (values, { resetForm }) => {
+    onRegister(values, {resetForm});
+  };
+  const onRegister = (values, {resetForm}) => {
+    setLoading(true);
+    axios
+      .post("https://lap-center.herokuapp.com/api/register", {
+        name: values.username,
+        email: values.email,
+        phone: values.phone,
+        password: values.password,
+      })
+      .then(function (response) {
+        setLoading(false);
+        console.log(response);
+        setMessage("Đăng ký thành công!");
+        setAlert(true);
+        resetForm()
+        setTimeout(() => {
+          setAlert(false);
+          // prop.closeRegister(false);
+        }, 3000);
+      })
+      .catch(function (error) {
+        setLoading(false);
+        console.log(error);
+        setMessage("Đăng ký thất bại!");
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+      });
+  };
   return (
     <div>
       <div className="container">
+        {loading && (
+          <div className="loading">
+            <CircularProgress color="inherit" className="loading_progress" />
+          </div>
+        )}
+        {alert && (
+          <div className="alert">
+            <Alert severity="info">{message}</Alert>
+          </div>
+        )}
         <div
           className="outsite"
           onClick={closeRegister}
@@ -44,7 +91,7 @@ export const Register = (prop) => {
             <Formik
               initialValues={initialValues}
               validationSchema={RegisterSchema}
-                onSubmit={onRegister}
+              onSubmit={onAdd}
             >
               {({ errors, touched }) => (
                 <Form className="form_fields">
@@ -104,7 +151,7 @@ export const Register = (prop) => {
                   </div>
                   <div className="field">
                     <button type="submit" className="btn_register">
-                      Đăng nhập
+                      Đăng ký
                     </button>
                   </div>
                 </Form>

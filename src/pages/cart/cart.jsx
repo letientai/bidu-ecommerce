@@ -20,6 +20,11 @@ export const Cart = () => {
     setCheckout();
   }, [cartProduct, countProduct]);
 
+  useEffect(() =>{
+    cartProduct.forEach((element) => {
+      element.checkBuyNow = false;
+    });
+  },[])
   const checkout = (data) => {
     setCheckout();
   };
@@ -35,6 +40,7 @@ export const Cart = () => {
     });
     setTotalPrice(totalprice);
     setCountCheckout(remainingProducts.length);
+    
   };
 
   const handleClickCheckBox = (check) => {

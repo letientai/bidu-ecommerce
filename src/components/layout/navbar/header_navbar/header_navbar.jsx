@@ -18,7 +18,7 @@ const HeaderNavbar = (prop) => {
     localStorage.clear();
     setTextLogin("Đăng nhập");
     prop.checkLogout(true)
-    navigate("/")
+    navigate("/bidu-ecommerce")
   };
 
   useEffect(() => {

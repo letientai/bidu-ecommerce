@@ -10,9 +10,6 @@ export const Cart = () => {
   const navigate = useNavigate();
 
   const moveToCart = () => {
-    cartProduct.forEach(element => {
-      element.checkBuyNow = false;
-    });
     navigate("/gio-hang");
   };
   return (

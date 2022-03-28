@@ -3,6 +3,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  .alert{
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 4;
+    animation: upToDown ease 1000ms;
+  }
   .loading{
     position: fixed;
     z-index: 4;
@@ -115,5 +122,16 @@
         }
       }
     }
+  }
+}
+
+@keyframes upToDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
