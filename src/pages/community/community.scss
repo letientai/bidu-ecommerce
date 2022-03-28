@@ -55,6 +55,25 @@
               }
             }
           }
+          .posts{
+            // margin-top: 10px;
+            width: 100%;
+          }
+        }
+        .top-seller{
+          width: 37%;
+          min-width: 420px;
+          background-color: #fafafa;
+          border: 1px solid #f1f1f1;
+          &_header{
+            background-color: black;
+            color: white;
+            text-align: center;
+            h3{
+              margin: 0;
+              padding: 10px;
+            }
+          }
         }
       }
     }

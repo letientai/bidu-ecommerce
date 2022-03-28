@@ -4,6 +4,9 @@ import chevronRight from "../../assets/img/chevron-right.svg";
 import { Story } from "../../components/community/story/story";
 import { DataUserStory } from "../../assets/data-userStory/dataUserStory";
 import Slider from "react-slick";
+import { DataTopSeller } from "../../assets/data-topSeller/dataSeller";
+import { Card } from "../../components/community/card-TopSeller/card";
+import { Post } from "../../components/community/post/post";
 
 export const Community = () => {
   const [data, setData] = useState({});
@@ -90,6 +93,21 @@ export const Community = () => {
                   </div>
                 ))}
               </Slider>
+              <div className="posts">
+                {DataTopSeller.map((item, index) => (
+                  <Post key={index} />
+                ))}
+              </div>
+            </div>
+            <div className="top-seller">
+              <div className="top-seller_header">
+                <h3>TOP NGƯỜI DÙNG</h3>
+              </div>
+              <div className="top-seller_content">
+                {DataTopSeller.map((item, index) => (
+                  <Card key={index} item={item} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
