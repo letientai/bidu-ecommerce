@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Banner } from "../../components/banner/banner";
 import { Carousel } from "../../components/carousel/carousel";
 import { SuggestionProduct } from "../../components/suggertionProduct/suggestionProduct";
 import { TopProduct } from "../../components/topSeller-Products/topProduct/topProduct";
 import { TopSeller } from "../../components/topSeller-Products/topSeller/topSeller";
 import "./home.scss";
+import { UseStore } from "../../store";
 export const Home = () => {
+  const [state] = UseStore();
+  const { cartProduct } = state;
+  useEffect(() => {
+    cartProduct.forEach((element) => {
+      element.checkBuyNow = false;
+    });
+  });
   return (
     <div className="container">
       <div className="Home_content">
@@ -20,7 +28,7 @@ export const Home = () => {
           <TopSeller />
         </div>
         <div className="Content Content_2">
-          <SuggestionProduct/>
+          <SuggestionProduct />
         </div>
       </div>
     </div>

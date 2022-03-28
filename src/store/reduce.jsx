@@ -52,7 +52,6 @@ function Reducer(state, action) {
       const remainingProducts = deleteProduct.filter(
         (x) => x.id !== action.payload.id
       );
-      console.log("aa", remainingProducts);
       if (remainingProducts.length === 0) {
         var remaining = 0;
       }
@@ -67,7 +66,7 @@ function Reducer(state, action) {
       );
       return {
         ...state,
-        dataCheckout: datacheckout
+        dataCheckout: datacheckout,
       };
     default:
       throw new Error("Invalid action.");

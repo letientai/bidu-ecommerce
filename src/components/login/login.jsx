@@ -15,7 +15,8 @@ const axios = require("axios");
 
 export const Login = (prop) => {
   const [loading, setLoading] = useState(false);
-  // const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [message, setMessage] = useState("");
   const initialValues = {
     username: "",
     password: "",
@@ -46,9 +47,19 @@ export const Login = (prop) => {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("isAdmin", response.data.isAdmin);
         prop.closeLogin(false);
+        setMessage("Đăng nhập thành công");
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
       })
       .catch(function (error) {
         setLoading(false);
+        setMessage("Sai tên đăng nhập hoặc mật khẩu");
+        setAlert(true);
+        setTimeout(() => {
+          setAlert(false);
+        }, 3000);
       });
   };
   return (
@@ -58,14 +69,11 @@ export const Login = (prop) => {
           <CircularProgress color="inherit" className="loading_progress" />
         </div>
       )}
-      {/* {alert && (
-        <Alert
-          severity="warning"
-          style={{ position: "fixed", zIndex: "4", top: "10px", right: "10px" }}
-        >
-          Sai tên đăng nhập hoặc mật khẩu!!!
-        </Alert>
-      )} */}
+      {alert && (
+        <div className="alert">
+          <Alert severity="info">{message}</Alert>
+        </div>
+      )}
       <div
         className="outsite"
         onClick={closeLogin}

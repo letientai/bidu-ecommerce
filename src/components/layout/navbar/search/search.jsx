@@ -14,6 +14,7 @@ export const Search = () => {
   const handleSearch = (e) =>{
     if(e.key === 'Enter' && data !== ""){
       navigate(`/tim-kiem/keyword=${removeVietnameseTones(data)}`)
+      setData("")
     }
   }
   const handleSearch1 = () =>{

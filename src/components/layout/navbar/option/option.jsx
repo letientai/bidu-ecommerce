@@ -7,21 +7,28 @@ import icon_shopping from "../../../../assets/icon/icon_shopping-active.svg";
 import chat_normal from "../../../../assets/icon/chat_normal.svg";
 import { action, UseStore } from "../../../../store";
 import { Cart } from "./cart/cart";
+import {useNavigate} from "react-router-dom"
 export const Option = () => {
   const [state, dispatch] = UseStore();
   const { cartProduct, countProduct, setStateCount } = state;
   const currenUser = localStorage.getItem("customerName");
+  const navigate = useNavigate()
+
   useEffect(() => {
     dispatch(action.SetCountCart());
     return cartProduct;
   }, [countProduct, cartProduct, setStateCount]);
+
+  const moveToCommunity = () =>{
+    navigate("/cong-dong")
+  }
   return (
     <div style={{ position: "relative" }}>
       <div className="option">
         <div className="option_icon ">
           <img src={icon_shopping} alt="" />
         </div>
-        <div className="option_icon">
+        <div className="option_icon" onClick={moveToCommunity}>
           <img src={icon_bidu} alt="" />
         </div>
         <div className="option_icon">

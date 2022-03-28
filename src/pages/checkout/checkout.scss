@@ -78,6 +78,42 @@
             cursor: pointer;
           }
         }
+        .order-payment-header {
+          display: flex;
+          background-color: #f4f4f4;
+          padding: 20px 0;
+          img {
+            width: 20px;
+            padding-left: 20px;
+          }
+          p {
+            margin: 0;
+            padding: 5px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+          }
+        }
+        .order-payment-title {
+          justify-content: flex-end;
+          display: flex;
+          background-color: #f4f4f4;
+          width: 100%;
+          .general-info {
+            padding: 20px 30px;
+            width: 400px;
+            .general-info-item {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              span {
+                font-size: 18px;
+                font-family: "Roboto", sans-serif;
+                font-weight: 570;
+                margin: 5px;
+              }
+            }
+          }
+        }
       }
     }
   }

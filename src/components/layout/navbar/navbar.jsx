@@ -50,7 +50,7 @@ export const Navbar = (prop) => {
   }
 
   const moveToHome = () =>{
-    navigate("/")
+    navigate("/bidu-ecommerce")
   }
 
   const checkLogout = (check) =>{

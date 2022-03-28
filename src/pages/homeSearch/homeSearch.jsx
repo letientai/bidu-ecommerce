@@ -5,11 +5,14 @@ import { Category } from "../../components/category/category";
 import { DataProduct } from "../../assets/data-product/dataProduct";
 import { useLocation } from "react-router-dom";
 import { removeVietnameseTones } from "../../components/layout/navbar/search/removeVNtones";
-import {Card} from "../../components/topSeller-Products/topSeller/card/card"
+import { Card } from "../../components/topSeller-Products/topSeller/card/card";
+import { UseStore } from "../../store";
 export const HomeSearch = () => {
   const [data, setData] = useState([]);
   const location = useLocation();
   const search = location.pathname?.split("keyword=")[1];
+  const [state] = UseStore();
+  const { cartProduct } = state;
 
   const fetchData = () => {
     setData(
@@ -19,6 +22,9 @@ export const HomeSearch = () => {
           ?.includes(search?.toLocaleLowerCase())
       )
     );
+    cartProduct.forEach((element) => {
+      element.checkBuyNow = false;
+    });
   };
 
   useEffect(() => {
@@ -32,6 +38,8 @@ export const HomeSearch = () => {
           <p>Trang chủ</p>
           <img src={chevronRight} alt="" />
           <p>Tìm kiếm</p>
+          <img src={chevronRight} alt="" />
+          <p>{search}</p>
         </div>
       </div>
       <div className="homeSearch_content">
@@ -40,10 +48,10 @@ export const HomeSearch = () => {
             <Category />
           </div>
           <div className="main_content">
-            {data?.map((item, index) =>(
-              <Card key={index} item={item}/>
+            {data?.map((item, index) => (
+              <Card key={index} item={item} />
             ))}
-            {data.length === 0 && <h3>Không tìm thấy sản phẩm nào!!!</h3> }
+            {data.length === 0 && <h3>Không tìm thấy sản phẩm nào!!!</h3>}
           </div>
         </div>
       </div>

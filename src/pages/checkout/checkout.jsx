@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./checkout.scss";
 import chevronRight from "../../assets/img/chevron-right.svg";
 import iconCheckout from "../../assets/img/icon-checkout.svg";
 import iconCheckoutVouucher from "../../assets/img/icon-checkout-system-vouucher.svg";
 import iconCheckoutPayment from "../../assets/img/icon-checkout-payment.svg";
-import { UseStore, action } from "../../store";
+import { UseStore } from "../../store";
 import { CardItem } from "../../components/checkout/card_item/card_item";
 export const Checkout = () => {
-  const [state, dispatch] = UseStore();
-  const { cartProduct, countProduct, dataCheckout } = state;
-
+  const [state] = UseStore();
+  const { dataCheckout } = state;
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [totalPayment, setTotalPayment] = useState(0)
+  const fetchData = () =>{
+    var totalamount = 0;
+    dataCheckout.forEach(element => {
+      totalamount = element.price * element.count + totalamount
+    });
+    setTotalAmount(totalamount)
+    setTotalPayment(totalamount + 32000)
+  }
+  useEffect(() => {
+    return fetchData();
+  },[])
   return (
     <div className="Checkout">
       <div className="Checkout_header">
@@ -37,9 +49,39 @@ export const Checkout = () => {
             <div className="system-vouchers">
               <div className="title">
                 <img src={iconCheckoutVouucher} alt="" />
-                <p>Thanh toán</p>
+                <p>Mã giảm giá</p>
               </div>
               <div className="action-vouchers">Chọn voucher</div>
+            </div>
+            <div className="order-payment-header">
+              <img src={iconCheckoutPayment} alt="" />
+              <p>Hình thức thanh toán</p>
+            </div>
+            <div className="order-payment-title">
+              <div className="general-info">
+                <div className="general-info-item">
+                  <span>Tổng tiền hàng ({dataCheckout.length} sản phẩm) </span>
+                  <span>{totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ</span>
+                </div>
+                <div className="general-info-item">
+                  <span>Phí vận chuyển:</span>
+                  <span>32.000đ</span>
+                </div>
+                <div className="general-info-item">
+                  <span>Giảm giá phí vận chuyển:</span>
+                  <span>0đ</span>
+                </div>
+                <div className="general-info-item">
+                  <span>Giảm giá tiền hàng:</span>
+                  <span>0đ</span>
+                </div>
+                <div className="general-info-item">
+                  <span style={{ fontWeight: "bolder" }}>Tổng thanh toán:</span>
+                  <span style={{ fontWeight: "bolder", color: "#fd37ae" }}>
+                    {totalPayment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
