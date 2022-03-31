@@ -114,6 +114,26 @@
             }
           }
         }
+        .order-create-section {
+          display: flex;
+          background-color: #f4f4f4;
+          padding: 20px 0;
+          justify-content: flex-end;
+          .create-order {
+            background-color: #191919;
+            color: white;
+            box-shadow: 2px 2px 5px rgb(96 96 96 / 25%);
+            display: inline-block;
+            cursor: pointer;
+            margin: 0 30px;
+            p {
+              margin: 0;
+              color: #fff;
+              font-weight: 700;
+              padding: 11px 51px;
+            }
+          }
+        }
       }
     }
   }

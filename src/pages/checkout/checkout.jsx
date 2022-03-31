@@ -83,6 +83,11 @@ export const Checkout = () => {
                 </div>
               </div>
             </div>
+            <div className="order-create-section">
+              <div className="create-order">
+                <p>Thanh toán</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

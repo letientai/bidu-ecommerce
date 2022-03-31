@@ -32,7 +32,6 @@ function Reducer(state, action) {
           setCount = Products[index].count;
         }
       });
-      console.log(setCount);
       return {
         ...state,
         cartProduct: Products,
