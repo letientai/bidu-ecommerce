@@ -20,11 +20,14 @@ export const Cart = () => {
     setCheckout();
   }, [cartProduct, countProduct]);
 
-  useEffect(() =>{
+  useEffect(() => {
     cartProduct.forEach((element) => {
       element.checkBuyNow = false;
     });
-  },[])
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   const checkout = (data) => {
     setCheckout();
   };
@@ -40,7 +43,6 @@ export const Cart = () => {
     });
     setTotalPrice(totalprice);
     setCountCheckout(remainingProducts.length);
-    
   };
 
   const handleClickCheckBox = (check) => {
@@ -54,7 +56,7 @@ export const Cart = () => {
 
   const handleCheckOut = () => {
     dispatch(action.HandleCheckout());
-    navigate("/thanh-toan")
+    navigate("/thanh-toan");
   };
   return (
     <div className="cart">

@@ -22,10 +22,14 @@ export const Option = () => {
   const moveToCommunity = () =>{
     navigate("/cong-dong")
   }
+  
+  const moveToLanding = () =>{
+    navigate("/landing")
+  }
   return (
     <div style={{ position: "relative" }}>
       <div className="option">
-        <div className="option_icon ">
+        <div className="option_icon " onClick={moveToLanding}>
           <img src={icon_shopping} alt="" />
         </div>
         <div className="option_icon" onClick={moveToCommunity}>

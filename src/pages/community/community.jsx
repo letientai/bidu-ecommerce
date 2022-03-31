@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./community.scss";
 import chevronRight from "../../assets/img/chevron-right.svg";
 import { Story } from "../../components/community/story/story";
@@ -42,6 +42,11 @@ export const Community = () => {
     ],
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   const openStory = (item, index) => {
     setData(item);
     setPosition(index + 1);

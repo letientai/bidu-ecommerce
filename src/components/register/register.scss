@@ -22,8 +22,9 @@
     background-color: white;
     width: 60%;
     height: 85%;
-    left: 20%;
-    top: 40px;
+    left: calc((100vw - 800px)/2)!important;
+    top: 10% !important;
+    color: #f9ffff;
     animation: UpToDown ease-out 600ms;
     .intro {
       width: 38%;

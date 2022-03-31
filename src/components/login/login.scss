@@ -34,8 +34,8 @@
     display: flex;
     background-color: white;
     width: 60%;
-    left: 20%;
-    top: 40px;
+    left: calc((100vw - 800px)/2)!important;
+    top: 10% !important;
     max-width: 900px;
     max-height: 550px;
     .intro {
