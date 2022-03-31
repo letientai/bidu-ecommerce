@@ -29,6 +29,9 @@ export const HomeSearch = () => {
 
   useEffect(() => {
     fetchData();
+    window.scrollTo({
+      top: 0,
+    });
   }, [location]);
 
   return (

@@ -7,7 +7,7 @@ import minus_grey from "../../assets/img/minus_grey.svg";
 import plus_white from "../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../store";
 import { Alert } from "@mui/material";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export const DetailProduct = (checklogin) => {
   const location = useLocation();
@@ -23,7 +23,7 @@ export const DetailProduct = (checklogin) => {
   const [state, dispatch] = UseStore();
   const { cartProduct } = state;
   const currenUser = localStorage.getItem("customerName");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchData = () => {
     var data = DataProduct.filter((x) => x.id === Number(id))[0];
@@ -31,7 +31,7 @@ export const DetailProduct = (checklogin) => {
     setImage(data?.image || "");
     setPrice(data?.price || 0);
     setMainData(data);
-    cartProduct.forEach(element => {
+    cartProduct.forEach((element) => {
       element.checkBuyNow = false;
     });
   };
@@ -58,6 +58,9 @@ export const DetailProduct = (checklogin) => {
   };
   useEffect(() => {
     fetchData();
+    window.scrollTo({
+      top: 0,
+    });
     return mainData;
   }, [location, checklogin]);
 
@@ -68,7 +71,7 @@ export const DetailProduct = (checklogin) => {
         const product = products.filter((x) => x.id === mainData.id);
         if (product.length === 0) {
           mainData.count = count;
-          mainData.checkBuyNow = false
+          mainData.checkBuyNow = false;
           dispatch(action.SetCartProduct(mainData));
         } else {
           mainData.count = mainData.count + count;
@@ -87,7 +90,7 @@ export const DetailProduct = (checklogin) => {
     }, 2000);
   };
   const buyNow = () => {
-    navigate("/thanh-toan")
+    navigate("/thanh-toan");
     // mainData.checkBuyNow=true;
   };
   return (

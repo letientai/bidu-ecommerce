@@ -13,7 +13,10 @@ export const Home = () => {
     cartProduct.forEach((element) => {
       element.checkBuyNow = false;
     });
-  });
+    window.scrollTo({
+      top: 0,
+    });
+  },[]);
   return (
     <div className="container">
       <div className="Home_content">
