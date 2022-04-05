@@ -1,5 +1,5 @@
 //NAVBAR
-.navbar{
+.navbar {
   position: relative;
 }
 .login {
@@ -29,7 +29,110 @@
         width: 50%;
         height: 42px;
       }
-      
+    }
+  }
+}
+
+.footer_bidu {
+  background: #191919;
+  @media (max-width: 1919px) {
+    font-size: 0.875rem;
+  }
+  &::after,
+  ::before {
+    box-sizing: border-box;
+  }
+  .containeer {
+    padding-bottom: 1.5rem !important;
+    padding-top: 1.5rem !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
+    display: flex;
+    max-width: 1140px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    @media screen and (max-width: 900px) {
+      display: block !important;
+      text-align: center;
+    }
+    .instruction-one {
+      display: block;
+      .text-header-footer {
+        font-size: 14px;
+        color: #faf9f9;
+        margin-top: 10px;
+        padding-bottom: 10px;
+        font-weight: 600;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+        margin-bottom: 0 !important;
+      }
+      a {
+        color: #fff !important;
+        font-family: var(--font-medium) !important;
+        font-size: 12px !important;
+        cursor: pointer;
+        margin-bottom: 1rem !important;
+        margin-top: 1rem !important;
+        display: block !important;
+        text-decoration: none;
+        background-color: transparent;
+      }
+      img {
+        vertical-align: middle;
+        border-style: none;
+      }
+      .pr-3 {
+        padding-right: 1rem !important;
+      }
+      .px-3 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      .max-h-120 {
+        width: 120px;
+      }
+    }
+  }
+  .footer-info {
+    background: rgb(35, 34, 34);
+    padding: 49px 16px;
+    text-align: center;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+    flex-direction: column;
+    display: flex;
+    .infor-company {
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+    }
+    .mx-2 {
+      margin-left: 0.5rem !important;
+      margin-right: 0.5rem !important;
+      text-decoration: none;
+      background-color: transparent;
+      img {
+        vertical-align: middle;
+        border-style: none;
+      }
+    }
+    .infor-contact {
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+      margin-top: 19px;
+    }
+    .infor-enterprise {
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+      margin-bottom: 37px;
+    }
+    .infor-license {
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+      opacity: 0.6;
     }
   }
 }

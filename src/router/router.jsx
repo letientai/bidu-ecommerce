@@ -9,29 +9,51 @@ import { Landing } from "../pages/landing/landing";
 import { Home } from "../pages/home/home";
 import { HomeSearch } from "../pages/homeSearch/homeSearch";
 import { StoreProvider } from "../store";
+import { Footer } from "../components/layout/footer";
+import { Admin } from "../pages/admin/admin";
+import { NavbarAdmin } from "../components/admin/layout/navbar";
 export const Routerr = (prop) => {
   const [checklogin, setCheckLogin] = useState(false);
+  const admin = localStorage.getItem("isAdmin");
+  const currenUser = localStorage.getItem("customerName");
+  console.log(admin);
   const checkLogin = (check) => {
     setCheckLogin(!checklogin);
   };
+
   return (
     <div>
       <StoreProvider>
-        <Router>
-          <Navbar checkLogin={checkLogin} />
-          <Routes>
-            <Route path="/bidu-ecommerce" element={<Home />} />
-            <Route path="/tim-kiem/keyword=:search" element={<HomeSearch />} />
-            <Route
-              path="/san-pham/:id"
-              element={<DetailProduct checklogin={checklogin} />}
-            />
-            <Route path="/gio-hang" element={<Cart />} />
-            <Route path="/thanh-toan" element={<Checkout />} />
-            <Route path="/cong-dong" element={<Community />} />
-            <Route path="/landing" element={<Landing />} />
-          </Routes>
-        </Router>
+        {admin === 'true' ? (
+          <Router>
+            <div style={{ position: "relative" }}>
+              {/* <NavbarAdmin /> */}
+              <Routes>
+                <Route path="/bidu-ecommerce" element={<Admin />} />
+              </Routes>
+            </div>
+          </Router>
+        ) : (
+          <Router>
+            <Navbar checkLogin={checkLogin} />
+            <Routes>
+              <Route path="/bidu-ecommerce" element={<Home />} />
+              <Route
+                path="/tim-kiem/keyword=:search"
+                element={<HomeSearch />}
+              />
+              <Route
+                path="/san-pham/:id"
+                element={<DetailProduct checklogin={checklogin} />}
+              />
+              <Route path="/gio-hang" element={<Cart />} />
+              <Route path="/thanh-toan" element={<Checkout />} />
+              <Route path="/cong-dong" element={<Community />} />
+              <Route path="/landing" element={<Landing />} />
+            </Routes>
+            <Footer />
+          </Router>
+        )}
       </StoreProvider>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from 'react'
-import bgBanner from "../../../assets/download/img/bg_banner_pc.jpg";
-import langding from "../../../assets/download/img/qr.jpg";
-import appstore from "../../../assets/download/img/appstore.svg";
-import ggplay from "../../../assets/download/img/ggplay.svg";
-import modelPc from "../../../assets/download/img/model_pc.png";
+import bgBanner from "../../assets/download/img/bg_banner_pc.jpg";
+import langding from "../../assets/download/img/qr.jpg";
+import appstore from "../../assets/download/img/appstore.svg";
+import ggplay from "../../assets/download/img/ggplay.svg";
+import modelPc from "../../assets/download/img/model_pc.png";
 export const Banner = () => {
   return (
     <div className="banner">
