@@ -1,9 +1,9 @@
 import React from "react";
-import icCamera from "../../../assets/download/img/ic-camera.svg";
-import icbag from "../../../assets/download/img/ic-bag.svg";
-import iclothes from "../../../assets/download/img/ic-clothes.svg";
-import icpackage from "../../../assets/download/img/ic-package.svg";
-import section4 from "../../../assets/download/img/img_section_4_vi.png";
+import icCamera from "../../assets/download/img/ic-camera.svg";
+import icbag from "../../assets/download/img/ic-bag.svg";
+import iclothes from "../../assets/download/img/ic-clothes.svg";
+import icpackage from "../../assets/download/img/ic-package.svg";
+import section4 from "../../assets/download/img/img_section_4_vi.png";
 export const Section3 = () => {
   const data = [
     {

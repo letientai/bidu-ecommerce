@@ -3,9 +3,9 @@ import "./landing.scss";
 import grayBidu from "../../assets/download/img/gray-bidu.svg";
 import leftComma from "../../assets/download/img/left-comma.svg";
 import rightComma from "../../assets/download/img/right-comma.svg";
-import { Banner } from "../../components/landing/banner/banner";
-import { Section3 } from "../../components/landing/section3/section3";
-import { Section4 } from "../../components/landing/section4/section4";
+import { Banner } from "../../components/landing/banner";
+import { Section3 } from "../../components/landing/section3";
+import { Section4 } from "../../components/landing/section4";
 export const Landing = () => {
   useEffect(() =>{
     window.scrollTo({
