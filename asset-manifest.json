@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bidu-ecommerce/static/css/main.37a38f9d.css",
-    "main.js": "/bidu-ecommerce/static/js/main.1ae4ff9f.js",
+    "main.css": "/bidu-ecommerce/static/css/main.e1a6c13c.css",
+    "main.js": "/bidu-ecommerce/static/js/main.ec38096e.js",
     "static/js/787.1406b76d.chunk.js": "/bidu-ecommerce/static/js/787.1406b76d.chunk.js",
     "static/media/img12.jpg": "/bidu-ecommerce/static/media/img12.cb38300ad1b907a5f651.jpg",
     "static/media/img13.jpg": "/bidu-ecommerce/static/media/img13.29670cc0db02e7f5d78c.jpg",
@@ -68,6 +68,7 @@
     "static/media/product18.jpeg": "/bidu-ecommerce/static/media/product18.3d90588b479fd3079495.jpeg",
     "static/media/img6.jpg": "/bidu-ecommerce/static/media/img6.10fdc5cde7879996e6ce.jpg",
     "static/media/banner5.jpg": "/bidu-ecommerce/static/media/banner5.cd303539ebec79e75864.jpg",
+    "static/media/icon-bf.jpg": "/bidu-ecommerce/static/media/icon-bf.c15e2f5fde18ae07024a.jpg",
     "static/media/momo.svg": "/bidu-ecommerce/static/media/momo.193d550fa3ed900237d3712b6be173fb.svg",
     "static/media/zalo.svg": "/bidu-ecommerce/static/media/zalo.0f1c0bbcda4672339127566b8d56c215.svg",
     "static/media/qr.jpg": "/bidu-ecommerce/static/media/qr.600ac6a8028baccf8d20.jpg",
@@ -113,12 +114,12 @@
     "static/media/plus_white.svg": "/bidu-ecommerce/static/media/plus_white.e0c426b6a8027cdce1d39efe2c80a05a.svg",
     "static/media/icon_registration.svg": "/bidu-ecommerce/static/media/icon_registration.43edd49dedb7e1f17f82eaf985eef7fc.svg",
     "static/media/minus_grey.svg": "/bidu-ecommerce/static/media/minus_grey.5501fdac4c8ceb8e5ad13491ed717881.svg",
-    "main.37a38f9d.css.map": "/bidu-ecommerce/static/css/main.37a38f9d.css.map",
-    "main.1ae4ff9f.js.map": "/bidu-ecommerce/static/js/main.1ae4ff9f.js.map",
+    "main.e1a6c13c.css.map": "/bidu-ecommerce/static/css/main.e1a6c13c.css.map",
+    "main.ec38096e.js.map": "/bidu-ecommerce/static/js/main.ec38096e.js.map",
     "787.1406b76d.chunk.js.map": "/bidu-ecommerce/static/js/787.1406b76d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.37a38f9d.css",
-    "static/js/main.1ae4ff9f.js"
+    "static/css/main.e1a6c13c.css",
+    "static/js/main.ec38096e.js"
   ]
 }
