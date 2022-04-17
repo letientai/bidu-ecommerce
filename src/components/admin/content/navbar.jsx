@@ -62,11 +62,10 @@ export const Navbar = () => {
               <h6 className="text-overflow m-0">Xin chào!</h6>
             </div>
             <div className="dropdown-divider"></div>
-
             <a
-              href="#"
+              href="/bidu-ecommerce"
               onClick={(e) => {
-                e.preventDefault();
+                // e.preventDefault();
                 logout();
               }}
               className="dropdown-item"

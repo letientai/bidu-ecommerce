@@ -1,7 +1,22 @@
 ._loading_overlay_wrapper{
+    position: relative;
     .main-content{
+        width: calc(100vw - 290px);
+        padding-left: 290px;
+        background-color: #f7f7f7;
+        .Products-Card{
+            margin-top: 2.5rem;
+        }
         .chart{
             margin-top: 3rem;
+            background-color: #FFFFFF;
+            border-color: rgba(0, 0, 0, 0.05);
+            width: 95%;
+            margin: 3rem auto;
+            .content{
+                width: 95%;
+                margin: 20px auto;
+            }
         }
     }
 }

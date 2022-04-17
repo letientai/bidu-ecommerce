@@ -11,12 +11,11 @@ import { HomeSearch } from "../pages/homeSearch/homeSearch";
 import { StoreProvider } from "../store";
 import { Footer } from "../components/layout/footer";
 import { Admin } from "../pages/admin/admin";
-import { NavbarAdmin } from "../components/admin/layout/navbar";
 export const Routerr = (prop) => {
   const [checklogin, setCheckLogin] = useState(false);
   const admin = localStorage.getItem("isAdmin");
-  const currenUser = localStorage.getItem("customerName");
   console.log(admin);
+
   const checkLogin = (check) => {
     setCheckLogin(!checklogin);
   };
@@ -26,12 +25,9 @@ export const Routerr = (prop) => {
       <StoreProvider>
         {admin === 'true' ? (
           <Router>
-            <div style={{ position: "relative" }}>
-              {/* <NavbarAdmin /> */}
               <Routes>
                 <Route path="/bidu-ecommerce" element={<Admin />} />
               </Routes>
-            </div>
           </Router>
         ) : (
           <Router>

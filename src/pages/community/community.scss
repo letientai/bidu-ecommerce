@@ -37,7 +37,9 @@
         justify-content: space-between;
         .story {
           width: 60%;
-          height: 100px;
+          height: 1000px;
+          overflow-y: hidden;
+          overflow: scroll;
           background-color: #fafafa;
           border: 1px solid #f1f1f1;
           .slick-story {

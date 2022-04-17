@@ -56,9 +56,7 @@ export const NavbarAdmin = () => {
     },
   ];
 
-  const hideCommerce = () => {
-    
-  }
+  const hideCommerce = () => {};
   return (
     <div className="navbarAdmin">
       <div className="scroll-wrapper">
