@@ -4,7 +4,7 @@ import icBf from "../../../assets/admin/img/icon-bf.jpg"
 export const Card = (prop) => {
   const item = prop.item
   return (
-    <a href="/category" style={{textDecoration: "none", color: "inherit"}} className='card card-stats dashboard-card mb-0'>
+    <a href="#" style={{textDecoration: "none", color: "inherit"}} className='card card-stats dashboard-card mb-0'>
         <div style={{minHeight: "200px" , borderRadius: "5px"}}>
             <div className="card-body">
               <div className="row">

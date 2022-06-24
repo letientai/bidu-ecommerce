@@ -15,7 +15,7 @@ import { Option } from "./option/option.jsx";
 export const Navbar = (prop) => {
   const [checkRegister, setCheckRegister] = useState(false);
   const [checkLogin, setCheckLogin] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const passCheckRegister = (check) => {
     if (check) {
@@ -36,31 +36,37 @@ export const Navbar = (prop) => {
   };
 
   const closeLogin = (check) => {
+    const admin = localStorage.getItem("isAdmin");
+    if (admin === "true") {
+      navigate("/bidu-ecommerce");
+    }
     if (!check) {
       setCheckLogin(false);
-      prop.checkLogin(true)
+      prop.checkLogin(true);
     }
   };
 
-  const openRegister = (check) =>{
+  const openRegister = (check) => {
     if (check) {
       setCheckLogin(false);
-      setCheckRegister(true)
+      setCheckRegister(true);
     }
-  }
+  };
 
-  const moveToHome = () =>{
-    navigate("/bidu-ecommerce")
-  }
+  const moveToHome = () => {
+    navigate("/bidu-ecommerce");
+  };
 
-  const checkLogout = (check) =>{
-    prop.checkLogin(false)
-  }
+  const checkLogout = (check) => {
+    prop.checkLogin(false);
+  };
   return (
     <div className="navbar">
       <div className="login">
-        {checkRegister && <Register closeRegister={closeRegister}/>}
-        {checkLogin && <Login closeLogin={closeLogin} openRegister={openRegister}/>}
+        {checkRegister && <Register closeRegister={closeRegister} />}
+        {checkLogin && (
+          <Login closeLogin={closeLogin} openRegister={openRegister} />
+        )}
       </div>
       <div className="navbar_container">
         <div className="header">
@@ -79,7 +85,7 @@ export const Navbar = (prop) => {
               <Search />
             </div>
             <div className="option">
-              <Option/>
+              <Option />
             </div>
           </div>
         </div>

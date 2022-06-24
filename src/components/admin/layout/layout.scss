@@ -21,6 +21,9 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .scroll-wrapper {
     position: relative;
     overflow: hidden;
@@ -52,7 +55,7 @@
           flex-direction: column;
           margin-right: -1.5rem;
           margin-left: -1.5rem;
-          isplay: flex;
+          display: flex;
           margin-bottom: 0;
           padding-left: 0;
           list-style: none;
