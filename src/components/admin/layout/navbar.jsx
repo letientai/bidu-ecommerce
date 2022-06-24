@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./layout.scss";
 import icBidu from "../../../assets/admin/img/ic-bidu-text.png";
 import lnactive from "../../../assets/admin/img/narbar/lnactive.png";
+import Arowlnactive from "../../../assets/admin/img/narbar/Arrow_Inactivedown.png";
 import home from "../../../assets/admin/img/narbar/home.svg";
 import banner from "../../../assets/admin/img/narbar/banner.svg";
 import category from "../../../assets/admin/img/narbar/category.svg";
@@ -13,6 +14,7 @@ import voucher from "../../../assets/admin/img/narbar/home.svg";
 import order from "../../../assets/admin/img/narbar/order.png";
 import registration from "../../../assets/admin/img/narbar/icon_registration.svg";
 export const NavbarAdmin = () => {
+  const [check, setCheck] = useState(true);
   const data = [
     {
       name: "Tổng quan",
@@ -56,7 +58,9 @@ export const NavbarAdmin = () => {
     },
   ];
 
-  const hideCommerce = () => {};
+  const hideCommerce = () => {
+    setCheck(!check);
+  };
   return (
     <div className="navbarAdmin">
       <div className="scroll-wrapper">
@@ -75,19 +79,45 @@ export const NavbarAdmin = () => {
                   <div className="CMS Commerce" onClick={hideCommerce}>
                     <div className="fo-we-bo">CMS Commerce</div>
                     <div className="image">
-                      <img src={lnactive} alt="" />
+                      <img src={!check ? lnactive : Arowlnactive} alt="" />
                     </div>
                   </div>
-                  <div className="ReactCollapse--collapse">
-                    <div className="ReactCollapse--content">
-                      {data.map((item, index) => (
-                        <div className="dropdownmenu" key={index}>
-                          <img src={item.img} alt="" />
-                          <div className="name">{item.name}</div>
-                        </div>
-                      ))}
+                  {!check && (
+                    <div className="ReactCollapse--collapse">
+                      <div className="ReactCollapse--content">
+                        {data.map((item, index) => (
+                          <div className="dropdownmenu" key={index}>
+                            <img src={item.img} alt="" />
+                            <div className="name">{item.name}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </ul>
+            </div>
+            <div className="collapse navbar-collapse">
+              <ul className="navbar-nav">
+                <div>
+                  <div className="CMS Commerce" onClick={hideCommerce}>
+                    <div className="fo-we-bo">CMS Commerce</div>
+                    <div className="image">
+                      <img src={!check ? lnactive : Arowlnactive} alt="" />
                     </div>
                   </div>
+                  {!check && (
+                    <div className="ReactCollapse--collapse">
+                      <div className="ReactCollapse--content">
+                        {data.map((item, index) => (
+                          <div className="dropdownmenu" key={index}>
+                            <img src={item.img} alt="" />
+                            <div className="name">{item.name}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </ul>
             </div>
