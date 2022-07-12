@@ -5,7 +5,6 @@ export const Navbar = () => {
   const headerRef = useRef();
 
   const handleClickOutside = (event) => {
-    console.log(headerRef.current);
     if (headerRef.current && !headerRef.current.contains(event.target)) {
       setProfileToggle(false);
       document.removeEventListener("click", handleClickOutside, true);

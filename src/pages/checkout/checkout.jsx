@@ -6,24 +6,21 @@ import iconCheckoutVouucher from "../../assets/img/icon-checkout-system-vouucher
 import iconCheckoutPayment from "../../assets/img/icon-checkout-payment.svg";
 import { UseStore } from "../../store";
 import { CardItem } from "../../components/checkout/card_item/card_item";
+import { commerce } from "../../lib/commerce";
+
 export const Checkout = () => {
   const [state] = UseStore();
   const { dataCheckout } = state;
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const fetchData = () => {
-    var totalamount = 0;
-    dataCheckout.forEach((element) => {
-      totalamount = element.price * element.count + totalamount;
+    commerce.cart.retrieve().then((cart) => {
+      console.log("a",cart);
     });
-    setTotalAmount(totalamount);
-    setTotalPayment(totalamount + 32000);
   };
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-    return fetchData();
+    
+      fetchData();
   }, []);
   return (
     <div className="Checkout">

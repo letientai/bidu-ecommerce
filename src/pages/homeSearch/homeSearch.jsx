@@ -27,6 +27,16 @@ export const HomeSearch = () => {
     });
   };
 
+  const sentData = (category) =>{
+    setData(
+      DataProduct.filter((item) =>
+        removeVietnameseTones(item?.name)
+          ?.toLocaleLowerCase()
+          ?.includes(category?.toLocaleLowerCase())
+      )
+    );
+  }
+
   useEffect(() => {
     fetchData();
     window.scrollTo({
@@ -48,7 +58,7 @@ export const HomeSearch = () => {
       <div className="homeSearch_content">
         <div className="main">
           <div className="category">
-            <Category />
+            <Category sentData={sentData}/>
           </div>
           <div className="main_content">
             {data?.map((item, index) => (

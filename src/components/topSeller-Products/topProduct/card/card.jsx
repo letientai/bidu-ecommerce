@@ -10,10 +10,10 @@ export const Card = (props) => {
   }
   return (
     <div className="cardTopProduct" onClick={moveToDetail}>
-      <img src={data.image} alt="" />
+      <img src={data?.image.url} alt="" /> 
       <div className="inf">
-        <p>{data.name}</p>
-        <b>{data.price}đ</b>
+        <p>{data?.name}</p>
+        <b>{data?.price.formatted_with_symbol}</b>
         <div className="address">
           <p>Việt nam</p>
         </div>

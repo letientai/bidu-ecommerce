@@ -7,7 +7,7 @@ export const Carousel = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 15,
+    slidesToShow: 14,
     slidesToScroll: 1,
     initialSlide: 0,
     arrows: true,

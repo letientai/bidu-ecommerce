@@ -8,6 +8,20 @@
     z-index: 3;
     animation: upToDown ease 1000ms;
   }
+  .loading {
+    position: fixed;
+    z-index: 4;
+    // text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    &_progress {
+      // margin-top: calc(100vh / 3);
+      position: absolute;
+      top: 70px;
+      left: 60px;
+    }
+  }
   &_header {
     padding-top: 110px;
     width: 100%;
