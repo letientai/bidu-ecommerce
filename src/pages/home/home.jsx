@@ -1,24 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Banner } from "../../components/banner/banner";
 import { Carousel } from "../../components/carousel/carousel";
 import { SuggestionProduct } from "../../components/suggertionProduct/suggestionProduct";
 import { TopProduct } from "../../components/topSeller-Products/topProduct/topProduct";
 import { TopSeller } from "../../components/topSeller-Products/topSeller/topSeller";
 import "./home.scss";
-import { UseStore } from "../../store";
+import { commerce } from "../../lib/commerce";
+import { CircularProgress } from "@mui/material";
+
 export const Home = () => {
-  const [state] = UseStore();
-  const { cartProduct } = state;
-  useEffect(() => {
-    cartProduct.forEach((element) => {
-      element.checkBuyNow = false;
+  const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+  const fetchData = () => {
+    setLoading(true)
+    commerce.products.list().then((product) => {
+      console.log(product);
+      setLoading(false)
     });
-    window.scrollTo({
-      top: 0,
-    });
-  },[]);
+  };
   return (
     <div className="container">
+      {loading && (
+        <div className="loading">
+          <CircularProgress color="inherit" className="loading_progress" />
+        </div>
+      )}
       <div className="Home_content">
         <div className="banner">
           <Banner />

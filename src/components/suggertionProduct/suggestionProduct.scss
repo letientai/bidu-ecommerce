@@ -16,4 +16,24 @@
    display: flex;
    flex-wrap: wrap;
   }
+  &_seeMore{
+    padding: 20px;
+    text-align: center;
+    .seeMore{
+      cursor: pointer;
+      margin: auto;
+      width: 120px;
+      height: 40px;
+      color: white;
+      display: flex;
+      align-items: center;
+      background-color: #191919;
+      font-family: Arial, Helvetica, sans-serif;
+      .text{
+        width: 100%;
+        text-align: center !important;
+      }
+    }
+   
+  }
 }

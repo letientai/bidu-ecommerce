@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./option.scss";
 import icon_cart from "../../../../assets/icon/icon_cart.svg";
 import icon_bell from "../../../../assets/icon/icon_bell.svg";
@@ -8,16 +8,21 @@ import chat_normal from "../../../../assets/icon/chat_normal.svg";
 import { action, UseStore } from "../../../../store";
 import { Cart } from "./cart/cart";
 import {useNavigate} from "react-router-dom"
+import { commerce } from "../../../../lib/commerce";
+
 export const Option = () => {
   const [state, dispatch] = UseStore();
-  const { cartProduct, countProduct, setStateCount } = state;
+  const {  checkAddToCart,CheckCountInCart } = state;
   const currenUser = localStorage.getItem("customerName");
   const navigate = useNavigate()
-
+  const [totalProduct, setTotalProduct] = useState(0)
+  const [dataCart, setDataCart] = useState({})
   useEffect(() => {
-    dispatch(action.SetCountCart());
-    return cartProduct;
-  }, [countProduct, cartProduct, setStateCount]);
+    commerce.cart.retrieve().then((cart) => {
+      setTotalProduct(cart.total_unique_items)
+      setDataCart(cart)
+    });
+  }, [checkAddToCart,CheckCountInCart]);
 
   const moveToCommunity = () =>{
     navigate("/cong-dong")
@@ -43,9 +48,9 @@ export const Option = () => {
         </div>
         <div className="option_icon cart">
           <div className="menuCart">
-            <Cart />
+            <Cart dataCart={dataCart} />
           </div>
-          {currenUser && <div className="amountProduct">{cartProduct.length}</div>}
+          {currenUser && <div className="amountProduct">{totalProduct}</div>}
           <img src={icon_cart} alt="" />
         </div>
       </div>

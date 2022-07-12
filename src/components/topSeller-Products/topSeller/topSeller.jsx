@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DataTopSeller } from "../../../assets/data-topSeller/dataSeller";
 import "./topSeller.scss";
 import Slider from "react-slick";
 import heart from "./shop-heart.svg";
 import { Card } from "./card/card";
 import { DataNewProduct } from "../../../assets/data-newProduct/dataNewProduct";
+import { commerce } from "../../../lib/commerce";
+import { useState } from "react";
+
 export const TopSeller = () => {
   var settings = {
     dots: false,
@@ -45,6 +48,20 @@ export const TopSeller = () => {
     initialSlide: 1,
     arrows: true,
   };
+  const [data,setData] = useState([])
+  const fetchData = () => {
+    commerce.products
+      .list({
+        limit: 13,
+      })
+      .then((product) => {
+        setData(product.data);
+        console.log(data); 
+      });
+  };
+  useEffect(() =>{
+    fetchData()
+  },[])
   return (
     <div className="content">
       <div className="topSeller">
@@ -79,7 +96,7 @@ export const TopSeller = () => {
         <div className="newProduct_content">
           <div className="slide">
             <Slider {...settings1}>
-              {DataNewProduct.map((item, index) => (
+              {data.map((item, index) => (
                 <Card key={index} item={item} />
               ))}
             </Slider>

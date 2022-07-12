@@ -6,33 +6,32 @@ import { DataProduct } from "../../assets/data-product/dataProduct";
 import minus_grey from "../../assets/img/minus_grey.svg";
 import plus_white from "../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../store";
-import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { commerce } from "../../lib/commerce";
+import { Alert, CircularProgress } from "@mui/material";
 
 export const DetailProduct = (checklogin) => {
   const location = useLocation();
   const id = location.pathname.split("san-pham/")[1];
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState(0);
   const [count, setCount] = useState(1);
-  const [mainData, setMainData] = useState({ name: "" });
+  const [mainData, setMainData] = useState();
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const [optionSize, setOptionSize] = useState(0);
   const [alert, setAlert] = useState(false);
   const [state, dispatch] = UseStore();
-  const { cartProduct } = state;
+  const {  checkAddToCart,CheckCountInCart } = state;
+
   const currenUser = localStorage.getItem("customerName");
   const navigate = useNavigate();
 
   const fetchData = () => {
-    var data = DataProduct.filter((x) => x.id === Number(id))[0];
-    setName(data?.name || "");
-    setImage(data?.image || "");
-    setPrice(data?.price || 0);
-    setMainData(data);
-    cartProduct.forEach((element) => {
-      element.checkBuyNow = false;
+    setLoading(true);
+    commerce.products.retrieve(id).then((product) => {
+      setMainData(product);
+      console.log(product);
+      setLoading(false);
     });
   };
 
@@ -46,52 +45,57 @@ export const DetailProduct = (checklogin) => {
     }
   };
 
-  const handleSize = (size) => {
-    mainData.size = size;
-    if (size === "S") {
-      setOptionSize(1);
-    } else if (size === "M") {
-      setOptionSize(2);
-    } else {
-      setOptionSize(3);
-    }
+  const handleSize = (index) => {
+    // const products = cartProduct;
+    // const product = products.filter((x) => x.id === mainData.id);
+    // if (product.length === 0) {
+    //   mainData.size = size;
+    // }else{
+    //   sentData.size = size
+    // }
+    // if (size === "S") {
+    //   setOptionSize(1);
+    // } else if (size === "M") {
+    //   setOptionSize(2);
+    // } else {
+    //   setOptionSize(3);
+    // }
   };
   useEffect(() => {
-    fetchData();
+    // let isMounted = true;
+    // if (isMounted) {
+    //   fetchData();
     window.scrollTo({
       top: 0,
     });
-    return mainData;
+    // }
+    // return () => {
+    //   isMounted = false;
+    // };
+    fetchData();
   }, [location, checklogin]);
 
   const addToCart = () => {
     if (currenUser) {
-      if (mainData.size) {
-        const products = cartProduct;
-        const product = products.filter((x) => x.id === mainData.id);
-        if (product.length === 0) {
-          mainData.count = count;
-          mainData.checkBuyNow = false;
-          dispatch(action.SetCartProduct(mainData));
-        } else {
-          mainData.count = mainData.count + count;
-          dispatch(action.SetCartProductId(mainData));
-        }
-        setMessage("Thêm vào giỏ hàng thành công");
-      } else {
-        setMessage("Vui lòng chọn kích cỡ");
-      }
-    } else {
-      setMessage("Đăng nhập để thêm vào giỏ hàng");
+      setLoading(true);
+      setMessage("Thêm sản phẩm thành công!");
+      commerce.cart.add(id, count).then((response) => {
+        console.log(response);
+        dispatch(action.CheckAddToCart(!checkAddToCart));
+        setLoading(false);
+        setAlert(true);
+        const timer = setTimeout(() => {
+          setAlert(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+      });
+    }else{
+      setMessage("Đăng nhập để thêm vào giỏ hàng!");
+      setAlert(true);
+        const timer = setTimeout(() => {
+          setAlert(false);
+        }, 3000);
     }
-    setAlert(true);
-    setTimeout(() => {
-      setAlert(false);
-    }, 2000);
-  };
-  const buyNow = () => {
-    navigate("/thanh-toan");
-    // mainData.checkBuyNow=true;
   };
   return (
     <div className="detailProduct">
@@ -100,22 +104,27 @@ export const DetailProduct = (checklogin) => {
           <Alert severity="info">{message}</Alert>
         </div>
       )}
+      {loading && (
+        <div className="loading">
+          <CircularProgress color="inherit" className="loading_progress" />
+        </div>
+      )}
       <div className="detailProduct_header">
         <div className="detailProduct_header_content">
           <p>Trang chủ</p>
           <img src={chevronRight} alt="" />
-          <p>{name}</p>
+          <p>{mainData?.name}</p>
         </div>
       </div>
       <div className="detailProduct_content">
         <div className="main">
           <div className="main_content">
             <div className="image">
-              <img src={image} alt="" />
+              <img src={mainData?.image.url} alt="" />
             </div>
             <div className="inf">
               <div className="name">
-                <p>{name}</p>
+                <p>{mainData?.name}</p>
                 <div className="row">
                   <div className="col">
                     <p>20</p>
@@ -129,45 +138,29 @@ export const DetailProduct = (checklogin) => {
                 </div>
               </div>
               <div className="price">
-                <h1>
-                  {(price * 0.9)
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                  đ
-                </h1>
+                <h1>{mainData?.price.formatted_with_symbol}</h1>
                 <div className="discount">
                   <span>10%</span>
                 </div>
               </div>
               <div className="price">
-                <p>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
+                <p>{(mainData?.price.raw * 110) / 100}đ</p>
               </div>
               <div className="sizes">
-                <span>Số lượng: </span>
-                <div
-                  className={
-                    optionSize === 1 ? "size size_s clickOPtion" : "size size_s"
-                  }
-                  onClick={(e) => handleSize("S")}
-                >
-                  S
-                </div>
-                <div
-                  className={
-                    optionSize === 2 ? "size size_m clickOPtion" : "size size_m"
-                  }
-                  onClick={(e) => handleSize("M")}
-                >
-                  M
-                </div>
-                <div
-                  className={
-                    optionSize === 3 ? "size size_l clickOPtion" : "size size_l"
-                  }
-                  onClick={(e) => handleSize("L")}
-                >
-                  L
-                </div>
+                <span>Kích cỡ: </span>
+                {mainData?.variant_groups[0].options?.map((item, index) => (
+                  <div
+                    key={index}
+                    className={
+                      optionSize === 1
+                        ? "size size_s clickOPtion"
+                        : "size size_s"
+                    }
+                    onClick={(e) => handleSize(index)}
+                  >
+                    {item.name}
+                  </div>
+                ))}
               </div>
               <div className="amount">
                 <span>Số lượng: </span>
@@ -189,9 +182,7 @@ export const DetailProduct = (checklogin) => {
                 <button className="btn addToCart" onClick={addToCart}>
                   Thêm vào giỏ
                 </button>
-                <button className="btn buyNow" onClick={buyNow}>
-                  Mua ngay
-                </button>
+                <button className="btn buyNow">Mua ngay</button>
               </div>
             </div>
           </div>
