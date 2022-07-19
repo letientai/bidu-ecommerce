@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bidu-ecommerce/static/css/main.485b2244.css",
-    "main.js": "/bidu-ecommerce/static/js/main.159e07f0.js",
+    "main.css": "/bidu-ecommerce/static/css/main.7ec659cb.css",
+    "main.js": "/bidu-ecommerce/static/js/main.51baeff2.js",
     "static/js/787.1406b76d.chunk.js": "/bidu-ecommerce/static/js/787.1406b76d.chunk.js",
     "static/media/img12.jpg": "/bidu-ecommerce/static/media/img12.cb38300ad1b907a5f651.jpg",
     "static/media/img13.jpg": "/bidu-ecommerce/static/media/img13.29670cc0db02e7f5d78c.jpg",
@@ -90,12 +90,12 @@
     "static/media/plus_white.svg": "/bidu-ecommerce/static/media/plus_white.e0c426b6a8027cdce1d39efe2c80a05a.svg",
     "static/media/icon_registration.svg": "/bidu-ecommerce/static/media/icon_registration.43edd49dedb7e1f17f82eaf985eef7fc.svg",
     "static/media/minus_grey.svg": "/bidu-ecommerce/static/media/minus_grey.5501fdac4c8ceb8e5ad13491ed717881.svg",
-    "main.485b2244.css.map": "/bidu-ecommerce/static/css/main.485b2244.css.map",
-    "main.159e07f0.js.map": "/bidu-ecommerce/static/js/main.159e07f0.js.map",
+    "main.7ec659cb.css.map": "/bidu-ecommerce/static/css/main.7ec659cb.css.map",
+    "main.51baeff2.js.map": "/bidu-ecommerce/static/js/main.51baeff2.js.map",
     "787.1406b76d.chunk.js.map": "/bidu-ecommerce/static/js/787.1406b76d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.485b2244.css",
-    "static/js/main.159e07f0.js"
+    "static/css/main.7ec659cb.css",
+    "static/js/main.51baeff2.js"
   ]
 }
