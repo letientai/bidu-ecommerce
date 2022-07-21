@@ -1,13 +1,14 @@
 // import DataProduct from "../assets/data-product/dataProduct"
 import {
   CHECK_ADD_TO_CART,
-  CHECK_CHANGE_COUNT_IN_CART
+  CHECK_CHANGE_COUNT_IN_CART,
+  SET_ITEM_CHECKOUT
 } from "./constants";
 const InitState = {
   setStateCount: 0,
-  dataCheckout: [],
   checkAddToCart: false,
   CheckCountInCart: false,
+  checkoutData: []
 };
 // function Reducer(state, action) {
 //   switch (action.type) {
@@ -83,6 +84,12 @@ function Reducer(state, action) {
       return {
         ...state,
         CheckCountInCart: action.payload
+      };
+    case SET_ITEM_CHECKOUT:
+      return {
+        ...state,
+        checkoutData: action.payload
+        // checkoutData: [...state.checkoutData, action.payload]
       };
     default:
       throw new Error("Invalid action.");

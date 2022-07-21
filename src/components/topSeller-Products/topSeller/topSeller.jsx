@@ -7,8 +7,10 @@ import { Card } from "./card/card";
 import { DataNewProduct } from "../../../assets/data-newProduct/dataNewProduct";
 import { commerce } from "../../../lib/commerce";
 import { useState } from "react";
+import { LoadingNewProduct } from "../../loading/loadingNewProduct";
 
 export const TopSeller = () => {
+  const [loading, setLoading] = useState(true);
   var settings = {
     dots: false,
     infinite: true,
@@ -48,7 +50,7 @@ export const TopSeller = () => {
     initialSlide: 1,
     arrows: true,
   };
-  const [data,setData] = useState([])
+  const [data, setData] = useState([]);
   const fetchData = () => {
     commerce.products
       .list({
@@ -56,12 +58,13 @@ export const TopSeller = () => {
       })
       .then((product) => {
         setData(product.data);
-        console.log(data); 
+        console.log(data);
+        setLoading(false);
       });
   };
-  useEffect(() =>{
-    fetchData()
-  },[])
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="content">
       <div className="topSeller">
@@ -95,11 +98,20 @@ export const TopSeller = () => {
         </div>
         <div className="newProduct_content">
           <div className="slide">
-            <Slider {...settings1}>
+            {/* <Slider {...settings1}>
               {data.map((item, index) => (
                 <Card key={index} item={item} />
               ))}
-            </Slider>
+            </Slider> */}
+            {loading ? (
+              <LoadingNewProduct />
+            ) : (
+              <Slider {...settings1}>
+                {data.map((item, index) => (
+                  <Card key={index} item={item} />
+                ))}
+              </Slider>
+            )}
           </div>
         </div>
       </div>

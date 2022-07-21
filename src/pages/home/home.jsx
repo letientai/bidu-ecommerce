@@ -9,25 +9,17 @@ import { commerce } from "../../lib/commerce";
 import { CircularProgress } from "@mui/material";
 
 export const Home = () => {
-  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     fetchData()
   },[])
   const fetchData = () => {
-    setLoading(true)
     commerce.products.list().then((product) => {
       console.log(product);
-      setLoading(false)
     });
   };
   return (
     <div className="container">
-      {loading && (
-        <div className="loading">
-          <CircularProgress color="inherit" className="loading_progress" />
-        </div>
-      )}
       <div className="Home_content">
         <div className="banner">
           <Banner />

@@ -5,22 +5,20 @@ export const CardItem = (prop) => {
   return (
     <div className="Checkout-card-item">
       <div className="image">
-        <img src={data.image} alt="" />
+        <img src={data.image.url} alt="" />
       </div>
       <div className="name">
-        <p>{data.name}</p>
-        <b>Kích cỡ: {data.size}</b>
+        <p>{data.product_name}</p>
+        <b>Kích cỡ: {data.selected_options[0].option_name}</b>
       </div>
       <div className="amount">
         <p>Số lượng</p>
-        <b>{data.count}</b>
+        <b>{data.quantity}</b>
       </div>
       <div className="priceTotal">
         <p>Thành tiền</p>
         <b>
-          {(data.count * data.price)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+          {data.line_total.formatted_with_symbol}
         </b>
       </div>
     </div>

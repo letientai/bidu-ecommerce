@@ -1,0 +1,27 @@
+.skeleton {
+  width: 187px;
+  background-color: #ffffff;
+  cursor: pointer;
+  margin: 15px;
+}
+.loadingTopProduct{
+  margin: 10px auto;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  .inf{
+    width: 52%;
+  }
+}
+.loadingNewProduct{
+  width: 160px;
+  margin: 10px ;
+  height: 307px;
+  padding: 5px;
+}
+.Allloading{
+  display: flex;
+}
+.rectangular{
+  margin: 10px auto;
+}
