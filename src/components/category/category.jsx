@@ -10,7 +10,7 @@ export const Category = (prop) => {
           <p>Danh mục</p>
       </div>
       <div className="Category_content">
-          <p onClick={(e) => filterSearch("")}>Tất cả</p>
+          <p onClick={(e) => filterSearch("all")}>Tất cả</p>
           <p>BIDU Ari</p>
           <p onClick={(e) => filterSearch("ao")}>Áo</p>
           <p onClick={(e) => filterSearch("vay")}>Váy liền/set</p>

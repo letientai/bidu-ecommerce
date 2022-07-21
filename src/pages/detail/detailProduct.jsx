@@ -1,37 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import chevronRight from "../../assets/img/chevron-right.svg";
 import { useLocation } from "react-router-dom";
 import "./detailProduct.scss";
-import { DataProduct } from "../../assets/data-product/dataProduct";
 import minus_grey from "../../assets/img/minus_grey.svg";
 import plus_white from "../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { commerce } from "../../lib/commerce";
 import { Alert, CircularProgress } from "@mui/material";
+import { LoadingDetail } from "../../components/loading/loadingDetail";
+import parse from "html-react-parser";
 
 export const DetailProduct = (checklogin) => {
+  const ref = useRef([]);
   const location = useLocation();
   const id = location.pathname.split("san-pham/")[1];
   const [count, setCount] = useState(1);
   const [mainData, setMainData] = useState();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const [optionSize, setOptionSize] = useState(0);
+  const [firstLoading, setFistLoading] = useState(true);
+  const [variantGroups, setVariantGroups] = useState({});
+  const [checkSize, setCheckSize] = useState(false);
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [optionSize, setOptionSize] = useState("");
   const [alert, setAlert] = useState(false);
   const [state, dispatch] = UseStore();
-  const {  checkAddToCart,CheckCountInCart } = state;
-
+  const { checkAddToCart, checkoutData } = state;
+  const [idItemCart, setIdItemCart] = useState("");
   const currenUser = localStorage.getItem("customerName");
   const navigate = useNavigate();
 
   const fetchData = () => {
-    setLoading(true);
     commerce.products.retrieve(id).then((product) => {
+      setFistLoading(false);
       setMainData(product);
-      console.log(product);
-      setLoading(false);
+      setDescription(product.description);
+      setImage(product?.image.url);
     });
   };
 
@@ -45,57 +51,83 @@ export const DetailProduct = (checklogin) => {
     }
   };
 
-  const handleSize = (index) => {
-    // const products = cartProduct;
-    // const product = products.filter((x) => x.id === mainData.id);
-    // if (product.length === 0) {
-    //   mainData.size = size;
-    // }else{
-    //   sentData.size = size
-    // }
-    // if (size === "S") {
-    //   setOptionSize(1);
-    // } else if (size === "M") {
-    //   setOptionSize(2);
-    // } else {
-    //   setOptionSize(3);
-    // }
+  const handleSize = (item, indexOption) => {
+    setVariantGroups({
+      [mainData.variant_groups[0].id]: item.id,
+    });
+    setCheckSize(true);
+    ref.current.forEach((element, index) => {
+      if (index === indexOption) {
+        ref.current[index].classList.add("clickOPtion");
+      } else {
+        ref.current[index].classList.remove("clickOPtion");
+      }
+    });
   };
   useEffect(() => {
-    // let isMounted = true;
-    // if (isMounted) {
-    //   fetchData();
     window.scrollTo({
       top: 0,
     });
-    // }
-    // return () => {
-    //   isMounted = false;
-    // };
     fetchData();
   }, [location, checklogin]);
 
-  const addToCart = () => {
+  const addToCart = async(check) => {
+    const timer = setTimeout(() => {
+      setAlert(false);
+    }, 3000);
     if (currenUser) {
-      setLoading(true);
-      setMessage("Thêm sản phẩm thành công!");
-      commerce.cart.add(id, count).then((response) => {
-        console.log(response);
-        dispatch(action.CheckAddToCart(!checkAddToCart));
-        setLoading(false);
+      if (checkSize) {
+        setLoading(true);
+        setMessage("Thêm sản phẩm thành công!");
+        commerce.cart.add(id, count, variantGroups).then((response) => {
+          dispatch(action.CheckAddToCart(!checkAddToCart));
+          setIdItemCart(response.line_item_id);
+          setLoading(false);
+          setAlert(check);
+          const timer = setTimeout(() => {
+            setAlert(false);
+          }, 3000);
+          return () => clearTimeout(timer);
+        });
+      } else {
+        setMessage("Chọn kích cỡ để tiếp tục!");
         setAlert(true);
-        const timer = setTimeout(() => {
-          setAlert(false);
-        }, 3000);
         return () => clearTimeout(timer);
-      });
-    }else{
-      setMessage("Đăng nhập để thêm vào giỏ hàng!");
+      }
+    } else {
+      setMessage("Đăng nhập để tiếp tục!");
       setAlert(true);
-        const timer = setTimeout(() => {
-          setAlert(false);
-        }, 3000);
+      return () => clearTimeout(timer);
     }
+  };
+
+  const payNow = async () => {
+    await addToCart(false);
+    // setLoading(true)
+    // console.log(checkoutData);
+    await commerce.cart.retrieve().then((cart) => {
+      dispatch(action.SetItemCheckout(cart.line_items));
+      checkoutData.forEach((element) => {
+        console.log(idItemCart);
+        if (element.id === idItemCart) {
+          element.checkBuyNow = true;
+        } else {
+          element.checkBuyNow = false;
+        }
+      });
+    });
+    await moveToCheckout();
+  };
+
+  const moveToCheckout = async () => {
+     localStorage.setItem(
+      "checkOutItem",
+      JSON.stringify(state.checkoutData)
+    );
+    // navigate("/thanh-toan");
+  };
+  const handleItemImage = (item) => {
+    setImage(item.url);
   };
   return (
     <div className="detailProduct">
@@ -118,73 +150,98 @@ export const DetailProduct = (checklogin) => {
       </div>
       <div className="detailProduct_content">
         <div className="main">
-          <div className="main_content">
-            <div className="image">
-              <img src={mainData?.image.url} alt="" />
-            </div>
-            <div className="inf">
-              <div className="name">
-                <p>{mainData?.name}</p>
-                <div className="row">
-                  <div className="col">
-                    <p>20</p>
-                    <span>Đánh giá</span>
-                  </div>
-                  <div className="devider"></div>
-                  <div className="col">
-                    <p>19</p>
-                    <span>Đã bán</span>
-                  </div>
+          {firstLoading ? (
+            <LoadingDetail />
+          ) : (
+            <div className="main_content">
+              <div className="slide-image">
+                <div className="slide">
+                  {mainData?.assets.map((item, index) => (
+                    <div
+                      key={index}
+                      className="item-img"
+                      style={{ backgroundImage: `url(${item.url})` }}
+                      onClick={(e) => handleItemImage(item)}
+                    ></div>
+                  ))}
                 </div>
               </div>
-              <div className="price">
-                <h1>{mainData?.price.formatted_with_symbol}</h1>
-                <div className="discount">
-                  <span>10%</span>
+              <div
+                className="image"
+                style={{ backgroundImage: `url(${image})` }}
+              ></div>
+              <div className="inf">
+                <div className="name">
+                  <p>{mainData?.name}</p>
+                  <div className="row">
+                    <div className="col">
+                      <p>20</p>
+                      <span>Đánh giá</span>
+                    </div>
+                    <div className="devider"></div>
+                    <div className="col">
+                      <p>19</p>
+                      <span>Đã bán</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="price">
-                <p>{(mainData?.price.raw * 110) / 100}đ</p>
-              </div>
-              <div className="sizes">
-                <span>Kích cỡ: </span>
-                {mainData?.variant_groups[0].options?.map((item, index) => (
+                <div className="price">
+                  <h1>{mainData?.price.formatted_with_symbol}</h1>
+                  <div className="discount">
+                    <span>10%</span>
+                  </div>
+                </div>
+                <div className="price">
+                  <p>{(mainData?.price.raw * 110) / 100}đ</p>
+                </div>
+                <div className="sizes">
+                  <span>Kích cỡ: </span>
+                  {mainData?.variant_groups[0].options?.map((item, index) => (
+                    <div
+                      ref={(element) => {
+                        ref.current[index] = element;
+                      }}
+                      key={index}
+                      className="size "
+                      onClick={(e) => handleSize(item, index)}
+                    >
+                      {item.name}
+                    </div>
+                  ))}
+                </div>
+                <div className="amount">
+                  <span>Số lượng: </span>
                   <div
-                    key={index}
-                    className={
-                      optionSize === 1
-                        ? "size size_s clickOPtion"
-                        : "size size_s"
-                    }
-                    onClick={(e) => handleSize(index)}
+                    className="btn_amount minus"
+                    onClick={() => handleCount("minus")}
                   >
-                    {item.name}
+                    <img className="icon_amount" src={minus_grey} alt="" />
                   </div>
-                ))}
-              </div>
-              <div className="amount">
-                <span>Số lượng: </span>
-                <div
-                  className="btn_amount minus"
-                  onClick={() => handleCount("minus")}
-                >
-                  <img className="icon_amount" src={minus_grey} alt="" />
+                  <p>{count}</p>
+                  <div
+                    className="btn_amount plus"
+                    onClick={() => handleCount("plus")}
+                  >
+                    <img className="icon_amount" src={plus_white} alt="" />
+                  </div>
                 </div>
-                <p>{count}</p>
-                <div
-                  className="btn_amount plus"
-                  onClick={() => handleCount("plus")}
-                >
-                  <img className="icon_amount" src={plus_white} alt="" />
+                <div className="button">
+                  <button
+                    className="btn addToCart"
+                    onClick={(e) => addToCart(true)}
+                  >
+                    Thêm vào giỏ
+                  </button>
+                  <button className="btn buyNow" onClick={payNow}>
+                    Mua ngay
+                  </button>
                 </div>
-              </div>
-              <div className="button">
-                <button className="btn addToCart" onClick={addToCart}>
-                  Thêm vào giỏ
-                </button>
-                <button className="btn buyNow">Mua ngay</button>
               </div>
             </div>
+          )}
+          <div className="description">
+            <h2>Mô tả:</h2>
+            {parse(description)}
           </div>
         </div>
       </div>

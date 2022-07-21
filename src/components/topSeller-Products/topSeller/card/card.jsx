@@ -1,18 +1,21 @@
 import React from "react";
 import "./card.scss";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export const Card = (props) => {
   const data = props.item;
-  const navigate = useNavigate()
-  const moveToDetail = () =>{
-    navigate(`/san-pham/${data.id}`)
-  }
+  const navigate = useNavigate();
+  const moveToDetail = () => {
+    navigate(`/san-pham/${data.id}`);
+  };
 
   return (
     <div className="cardTopNewProduct" onClick={moveToDetail}>
       <div className="image">
-        <img src={data?.image.url} alt="" />
+        <div
+          className="img"
+          style={{ backgroundImage: `url(${data.image.url})` }}
+        ></div>
       </div>
       <div className="company">
         <span>Chính hãng</span>

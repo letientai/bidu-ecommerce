@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./cart_item.scss";
 import minus_grey from "../../../assets/img/minus_grey.svg";
 import plus_white from "../../../assets/img/plus_white.svg";
 import { UseStore, action } from "../../../store";
 import CheckBox from "react-animated-checkbox";
 import { commerce } from "../../../lib/commerce";
-import editing from "../../../assets/img/editing.png";
+import editing from "../../../assets/img/pencil.png";
+import tick from "../../../assets/img/tick.png";
+import { useNavigate } from "react-router-dom";
 
 export const CartItem = (prop) => {
   const item = prop.item;
   const checkAll = prop.checkAll;
   const [state, dispatch] = UseStore();
-  const { checkAddToCart, CheckCountInCart } = state;
+  const { checkAddToCart, CheckCountInCart, checkoutData } = state;
   const [check, setCheck] = useState(false);
   const [edit, setEdit] = useState(false);
   const [count, setCount] = useState(item.quantity);
+  const [variantGroups, setVariantGroups] = useState();
+  const navigate = useNavigate();
+  const ref = useRef([]);
+
+  const moveToDetail = () => {
+    navigate(`/san-pham/${item.product_id}`);
+  };
   useEffect(() => {
     setCheck(checkAll);
+    console.log("v",item);
   }, [checkAll]);
+  useEffect(() => {
+    commerce.products.retrieve(item.product_id).then((product) => {
+      setVariantGroups(product.variant_groups[0]);
+    });
+  }, []);
   const handleCount = (check) => {
-    // var count = item.quantity;
     if (check === "plus") {
       setCount(count + 1);
     } else if (count === 1) {
@@ -46,16 +60,43 @@ export const CartItem = (prop) => {
 
   const handleClick = () => {
     setCheck(!check);
-    // if (check !== true) {
-    //   item.checkBuyNow = true;
-    // } else {
-    //   item.checkBuyNow = false;
-    // }
-    // prop.checkout();
+    const indexCheck = checkoutData.findIndex(
+      (x) => x.product_id === item.product_id
+    );
+    if (!check) {
+      checkoutData[indexCheck].checkBuyNow = true;
+    } else {
+      checkoutData[indexCheck].checkBuyNow = false;
+    }
+    dispatch(action.CheckAddToCart(!checkAddToCart));
   };
   const editCount = () => {
     setEdit(!edit);
   };
+
+  const cancelUpdate = () => {
+    setCount(item.quantity);
+    setEdit(!edit);
+  };
+
+  const handleFinishCount = () => {
+    prop.setLoading(true);
+    commerce.cart.update(item.id, { quantity: count, option_id: "optn_kd6Ll2QN1n5V2m"}).then((response) => {
+      prop.setLoading(false);
+      dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
+      setEdit(!edit);
+    });
+  };
+
+  const handleSize = (item, indexOption) =>{
+    ref.current.forEach((element, index) => {
+      if (index === indexOption) {
+        ref.current[index].classList.add("clickOPtion");
+      } else {
+        ref.current[index].classList.remove("clickOPtion");
+      }
+    });
+  }
   return (
     <div className="cart-item">
       <div className="check">
@@ -74,8 +115,29 @@ export const CartItem = (prop) => {
         <img src={item.image.url} alt="" />
       </div>
       <div className="name">
-        <p>{item.name}</p>
+        <div className="nameItem">
+          <p onClick={moveToDetail}>{item.name}</p>
+        </div>
         <p>{item.price.formatted_with_code}</p>
+        <div className="variant_size">
+          <span>Kích cỡ: </span>
+          {edit ? (
+            variantGroups?.options.map((item, index) => (
+              <div
+                ref={(element) => {
+                  ref.current[index] = element;
+                }}
+                key={index}
+                className="optionSize"
+                onClick={(e) => handleSize(item, index)}
+              >
+                <p>{item.name}</p>
+              </div>
+            ))
+          ) : (
+            <p>{item.selected_options[0].option_name}</p>
+          )}
+        </div>
       </div>
       <div className="amount">
         <span>Số lượng: </span>
@@ -98,9 +160,16 @@ export const CartItem = (prop) => {
           </div>
         )}
       </div>
-      <div className="btn_delete">
-        <button onClick={handleDelete}>Xóa</button>
-      </div>
+      {edit ? (
+        <div className="btn_update">
+          <button onClick={handleFinishCount}>Xong</button>
+          <button onClick={cancelUpdate}>Hủy</button>
+        </div>
+      ) : (
+        <div className="btn_delete">
+          <button onClick={handleDelete}>Xóa</button>
+        </div>
+      )}
     </div>
   );
 };

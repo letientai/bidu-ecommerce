@@ -29,13 +29,26 @@ export const Admin = () => {
       id: "basic-bar",
     },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991],
+      categories: [
+        "Tháng 1",
+        "Tháng 2",
+        "Tháng 3",
+        "Tháng 4",
+        "Tháng 5",
+        "Tháng 6",
+        "Tháng 7",
+        "Tháng 8",
+        "Tháng 9",
+        "Tháng 10",
+        "Tháng 11",
+        "Tháng 12",
+      ],
     },
   });
   const series = [
     {
       name: "series-1",
-      data: [90, 40, 76, 10, 93, 65, 40, 91, 100, 28],
+      data: [90, 10, 30, 35, 70, 65, 50, 91, 70, 28, 50, 100],
     },
   ];
   return (
@@ -52,9 +65,7 @@ export const Admin = () => {
           ))}
         </div>
         <div className="chart">
-          <div className="header">
-            
-          </div>
+          <div className="header"></div>
           <div className="content">
             <Chart
               options={options}

@@ -9,17 +9,24 @@ import { CardItem } from "../../components/checkout/card_item/card_item";
 import { commerce } from "../../lib/commerce";
 
 export const Checkout = () => {
-  const [state] = UseStore();
-  const { dataCheckout } = state;
-  const [totalAmount, setTotalAmount] = useState(0);
+  // const [state] = UseStore();
+  // const { checkoutData } = state;
+  const [totalItem,setTotalItem] = useState(0)
   const [totalPayment, setTotalPayment] = useState(0);
+
+  const checkOutItem = localStorage.getItem("checkOutItem");
+  const dataCheckout = JSON.parse(checkOutItem).filter((x) => x.checkBuyNow === true)
+  // const dataCheckout = checkoutData.filter((x) => x.checkBuyNow === true)
   const fetchData = () => {
-    commerce.cart.retrieve().then((cart) => {
-      console.log("a",cart);
+    console.log(dataCheckout);
+    let total = 0
+    dataCheckout.forEach(element => {
+      total = element.line_total.raw + total
     });
+    setTotalItem(total)
+    setTotalPayment(total + 32000)
   };
   useEffect(() => {
-    
       fetchData();
   }, []);
   return (
@@ -62,7 +69,7 @@ export const Checkout = () => {
                 <div className="general-info-item">
                   <span>Tổng tiền hàng ({dataCheckout.length} sản phẩm) </span>
                   <span>
-                    {totalAmount
+                    {totalItem
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                     đ
@@ -100,5 +107,6 @@ export const Checkout = () => {
         </div>
       </div>
     </div>
-  );
+  
+ );
 };

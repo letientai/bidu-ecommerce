@@ -10,9 +10,10 @@ export const Card = (props) => {
   }
   return (
     <div className="cardTopProduct" onClick={moveToDetail}>
-      <img src={data?.image.url} alt="" /> 
+      {/* <img src={data?.image.url} alt="" />  */}
+      <div className="image"  style={{backgroundImage: `url(${data.image.url})`}}></div>
       <div className="inf">
-        <p>{data?.name}</p>
+        <p className="name">{data?.name}</p>
         <b>{data?.price.formatted_with_symbol}</b>
         <div className="address">
           <p>Việt nam</p>

@@ -15,22 +15,27 @@ export const Cart = () => {
   const [countCheckout, setCountCheckout] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItem, setTotalItem] = useState(0);
-  const [checkCount, setCheckCount] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [state, dispatch] = UseStore();
-  const { CheckCountInCart } = state;
+  const { CheckCountInCart, checkoutData, checkAddToCart } = state;
+  const totalProductCheck = checkoutData.filter((x) => x.checkBuyNow === true)
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true)
     commerce.cart.retrieve().then((cart) => {
+      dispatch(action.SetItemCheckout(cart.line_items))
       setData(cart.line_items)
       setTotalItem(cart.total_unique_items)
       setLoading(false)
+      console.log(cart);
     });
-  }, [checkCount,CheckCountInCart]);
+  }, [CheckCountInCart]);
 
+  // useEffect(() =>{
+  //   console.log(checkoutData);
+  // },[checkAddToCart])
   const checkout = (data) => {
     setCheckout();
   };
@@ -50,15 +55,22 @@ export const Cart = () => {
 
   const handleClickCheckBox = (check) => {
     setCheck(check);
+    if(check){
+      checkoutData.forEach(element => {
+        element.checkBuyNow = true
+      });
+    }else{
+      checkoutData.forEach(element => {
+        element.checkBuyNow = false
+      });
+    }
   };
 
   const handleCheckOut = () => {
-    // dispatch(action.HandleCheckout());
-    // navigate("/thanh-toan");
-    // console.log(cartProduct);
+    localStorage.setItem("checkOutItem", JSON.stringify(state.checkoutData))
+    navigate("/thanh-toan");
   };
   const checkHandleCount = () =>{
-    // setCheckCount(!checkCount)
   }
   return (
     <div className="cart">
@@ -101,7 +113,7 @@ export const Cart = () => {
             </div>
             <div className="checkout">
               <span style={{ fontWeight: "bolder" }}>Tổng thanh toán</span>
-              <span>({countCheckout} sản phẩm)</span>
+              <span>({totalProductCheck.length} sản phẩm)</span>
               <span style={{ color: "#FE3877", fontWeight: "bolder" }}>
                 {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
               </span>
