@@ -16,62 +16,80 @@ export const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItem, setTotalItem] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [checkFinishUpdateItemProduct, setCheckFinishUpdateItemProduct] =
+    useState(false);
 
   const [state, dispatch] = UseStore();
   const { CheckCountInCart, checkoutData, checkAddToCart } = state;
-  const totalProductCheck = checkoutData.filter((x) => x.checkBuyNow === true)
+  const totalProductCheck = checkoutData.filter((x) => x.checkBuyNow === true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     commerce.cart.retrieve().then((cart) => {
-      dispatch(action.SetItemCheckout(cart.line_items))
-      setData(cart.line_items)
-      setTotalItem(cart.total_unique_items)
-      setLoading(false)
-      console.log(cart);
+      dispatch(action.SetItemCheckout(cart.line_items));
+      setData(cart.line_items);
+      setTotalItem(cart.total_unique_items);
+      setLoading(false);
+      setCheckFinishUpdateItemProduct(!checkFinishUpdateItemProduct);
     });
   }, [CheckCountInCart]);
 
-  // useEffect(() =>{
-  //   console.log(checkoutData);
-  // },[checkAddToCart])
-  const checkout = (data) => {
-    setCheckout();
-  };
-
-  const setCheckout = () => {
-    // const products = cartProduct;
-    // var totalProduct = 0;
-    // var totalprice = 0;
-    // const remainingProducts = products.filter((x) => x.checkBuyNow === true);
-    // remainingProducts.forEach((element) => {
-    //   totalProduct = totalProduct + element.count;
-    //   totalprice = totalprice + element.count * element.price;
-    // });
-    // setTotalPrice(totalprice);
-    // setCountCheckout(remainingProducts.length);
-  };
+  useEffect(() => {
+    let count = 0;
+    checkoutData.forEach((element) => {
+      if (element.checkBuyNow === true) {
+        count = count + element.line_total.raw;
+      }
+    });
+    setTotalPrice(count);
+  }, [checkAddToCart, loading, check]);
 
   const handleClickCheckBox = (check) => {
     setCheck(check);
-    if(check){
-      checkoutData.forEach(element => {
-        element.checkBuyNow = true
+    if (check) {
+      checkoutData.forEach((element) => {
+        element.checkBuyNow = true;
       });
-    }else{
-      checkoutData.forEach(element => {
-        element.checkBuyNow = false
+    } else {
+      checkoutData.forEach((element) => {
+        element.checkBuyNow = false;
       });
     }
   };
 
   const handleCheckOut = () => {
-    localStorage.setItem("checkOutItem", JSON.stringify(state.checkoutData))
+    localStorage.setItem("checkOutItem", JSON.stringify(state.checkoutData));
     navigate("/thanh-toan");
   };
-  const checkHandleCount = () =>{
-  }
+  const checkHandleCount = () => {};
+
+  const handleDeleteAll = () => {
+    setLoading(true);
+    commerce.cart.delete().then((response) => {
+      dispatch(action.CheckAddToCart(!checkAddToCart));
+      setData([]);
+      setTotalItem(0);
+      dispatch(action.CheckAddToCart(!checkAddToCart));
+      setLoading(false);
+    });
+  };
+
+  const UpdateDuplicateProduct = async (
+    productLocation,
+    count,
+    variantGroupsUpdate,
+    ItemDelete
+  ) => {
+    setLoading(true);
+    commerce.cart.remove(ItemDelete.id).then((response) => {
+      commerce.cart
+        .add(data[productLocation].product_id, count, variantGroupsUpdate)
+        .then((response) => {
+          dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
+        });
+    });
+  };
   return (
     <div className="cart">
       {loading && (
@@ -89,12 +107,26 @@ export const Cart = () => {
       <div className="cart_content">
         <div className="main">
           <div className="title">
-            <img src={iconCart} alt="" />
-            <span>Giỏ hàng</span>
+            <div>
+              <img src={iconCart} alt="" />
+              <span>Giỏ hàng</span>
+            </div>
+            <div className="btn-delete-all">
+              <button onClick={handleDeleteAll}>Xóa tất cả</button>
+            </div>
           </div>
           <div className="list-table">
             {data?.map((item, index) => (
-              <CartItem item={item} key={index} setLoading={setLoading} checkHandleCount={checkHandleCount} checkAll={check}/>
+              <CartItem
+                item={item}
+                key={index}
+                setLoading={setLoading}
+                checkHandleCount={checkHandleCount}
+                checkAll={check}
+                data={data}
+                UpdateDuplicateProduct={UpdateDuplicateProduct}
+                checkFinishUpdateItemProduct={checkFinishUpdateItemProduct}
+              />
             ))}
           </div>
           <div className="cart-actions">

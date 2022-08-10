@@ -15,7 +15,9 @@ const HeaderNavbar = (prop) => {
   };
 
   const logOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("customerName");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("userId");
     setTextLogin("Đăng nhập");
     prop.checkLogout(true)
     navigate("/bidu-ecommerce")

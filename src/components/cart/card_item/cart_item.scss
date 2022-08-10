@@ -84,7 +84,7 @@
   .amount {
     display: flex;
     padding: 70px 0px;
-    width: 15%;
+    width: 20%;
     min-width: 200px;
     span {
       margin: 5px 0px 5px 0;
@@ -117,11 +117,10 @@
     }
   }
   .btn_update {
-    display: block;
+    display: block !important;
     width: 20%;
     text-align: center;
     padding: 0px 20px;
-
     button {
       margin-top: 20px;
       cursor: pointer;

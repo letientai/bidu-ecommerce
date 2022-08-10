@@ -69,7 +69,7 @@ export const TopSeller = () => {
     <div className="content">
       <div className="topSeller">
         <div className="topSeller_header">
-          <h3>TOP NGƯỜI BÁN</h3>
+          <h3>TOP NGƯỜI MUA</h3>
         </div>
         <div className="topSeller_sellers">
           <Slider {...settings}>
