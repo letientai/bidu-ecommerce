@@ -2,13 +2,15 @@
 import {
   CHECK_ADD_TO_CART,
   CHECK_CHANGE_COUNT_IN_CART,
-  SET_ITEM_CHECKOUT
+  SET_ITEM_CHECKOUT,
+  SET_PRODUCTS_ORDER
 } from "./constants";
 const InitState = {
   setStateCount: 0,
   checkAddToCart: false,
   CheckCountInCart: false,
-  checkoutData: []
+  checkoutData: [],
+  listOrder: [],
 };
 // function Reducer(state, action) {
 //   switch (action.type) {
@@ -90,6 +92,12 @@ function Reducer(state, action) {
         ...state,
         checkoutData: action.payload
         // checkoutData: [...state.checkoutData, action.payload]
+      };
+    case SET_PRODUCTS_ORDER:
+      state.listOrder.push(action.payload)
+      return {
+        ...state,
+        // listOrder: list
       };
     default:
       throw new Error("Invalid action.");

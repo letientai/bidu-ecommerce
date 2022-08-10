@@ -13,8 +13,13 @@ import shop from "../../../assets/admin/img/narbar/shop.svg";
 import voucher from "../../../assets/admin/img/narbar/home.svg";
 import order from "../../../assets/admin/img/narbar/order.png";
 import registration from "../../../assets/admin/img/narbar/icon_registration.svg";
+import { removeVietnameseTones } from "../../layout/navbar/search/removeVNtones";
+import { useNavigate } from "react-router-dom";
+
 export const NavbarAdmin = () => {
   const [check, setCheck] = useState(true);
+  const navigate = useNavigate();
+
   const data = [
     {
       name: "Tổng quan",
@@ -61,6 +66,11 @@ export const NavbarAdmin = () => {
   const hideCommerce = () => {
     setCheck(!check);
   };
+  const moveToItem = (item) =>{
+    console.log(item);
+    const address = removeVietnameseTones(item.name)
+    navigate(`/${address}`)
+  }
   return (
     <div className="navbarAdmin">
       <div className="scroll-wrapper">
@@ -82,35 +92,11 @@ export const NavbarAdmin = () => {
                       <img src={!check ? lnactive : Arowlnactive} alt="" />
                     </div>
                   </div>
-                  {!check && (
+                  {check && (
                     <div className="ReactCollapse--collapse">
                       <div className="ReactCollapse--content">
                         {data.map((item, index) => (
-                          <div className="dropdownmenu" key={index}>
-                            <img src={item.img} alt="" />
-                            <div className="name">{item.name}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </ul>
-            </div>
-            <div className="collapse navbar-collapse">
-              <ul className="navbar-nav">
-                <div>
-                  <div className="CMS Commerce" onClick={hideCommerce}>
-                    <div className="fo-we-bo">CMS Commerce</div>
-                    <div className="image">
-                      <img src={!check ? lnactive : Arowlnactive} alt="" />
-                    </div>
-                  </div>
-                  {!check && (
-                    <div className="ReactCollapse--collapse">
-                      <div className="ReactCollapse--content">
-                        {data.map((item, index) => (
-                          <div className="dropdownmenu" key={index}>
+                          <div className="dropdownmenu" key={index} onClick={(e) => moveToItem(item)}>
                             <img src={item.img} alt="" />
                             <div className="name">{item.name}</div>
                           </div>

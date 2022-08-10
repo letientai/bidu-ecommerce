@@ -20,15 +20,15 @@ export const DetailProduct = (checklogin) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [firstLoading, setFistLoading] = useState(true);
-  const [variantGroups, setVariantGroups] = useState({});
+  const [variantGroups, setVariantGroups] = useState({}); 
   const [checkSize, setCheckSize] = useState(false);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [optionSize, setOptionSize] = useState("");
   const [alert, setAlert] = useState(false);
   const [state, dispatch] = UseStore();
   const { checkAddToCart, checkoutData } = state;
   const [idItemCart, setIdItemCart] = useState("");
+  const [data, setData] = useState([]);
   const currenUser = localStorage.getItem("customerName");
   const navigate = useNavigate();
 
@@ -50,7 +50,13 @@ export const DetailProduct = (checklogin) => {
       setCount(count - 1);
     }
   };
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+    fetchData();
+  }, [location, checklogin]);
+  
   const handleSize = (item, indexOption) => {
     setVariantGroups({
       [mainData.variant_groups[0].id]: item.id,
@@ -64,14 +70,8 @@ export const DetailProduct = (checklogin) => {
       }
     });
   };
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-    fetchData();
-  }, [location, checklogin]);
-
-  const addToCart = async(check) => {
+  
+  const addToCart = async (check) => {
     const timer = setTimeout(() => {
       setAlert(false);
     }, 3000);
@@ -80,10 +80,31 @@ export const DetailProduct = (checklogin) => {
         setLoading(true);
         setMessage("Thêm sản phẩm thành công!");
         commerce.cart.add(id, count, variantGroups).then((response) => {
+          console.log(id, count, variantGroups);
           dispatch(action.CheckAddToCart(!checkAddToCart));
           setIdItemCart(response.line_item_id);
-          setLoading(false);
+          setLoading(!check);
           setAlert(check);
+          setTimeout(() => {
+            if (!check) {
+              commerce.cart.retrieve().then((cart) => {
+                dispatch(action.SetItemCheckout(cart.line_items));
+                setData(cart.line_items);
+                cart.line_items.forEach((element) => {
+                  if (element.id === response.line_item_id) {
+                    element.checkBuyNow = true;
+                  } else {
+                    element.checkBuyNow = false;
+                  }
+                });
+                setTimeout(() => {
+                  setLoading(false);
+                  moveToCheckout(cart.line_items);
+                }, 1000);
+              });
+            }
+          }, 500);
+
           const timer = setTimeout(() => {
             setAlert(false);
           }, 3000);
@@ -105,26 +126,11 @@ export const DetailProduct = (checklogin) => {
     await addToCart(false);
     // setLoading(true)
     // console.log(checkoutData);
-    await commerce.cart.retrieve().then((cart) => {
-      dispatch(action.SetItemCheckout(cart.line_items));
-      checkoutData.forEach((element) => {
-        console.log(idItemCart);
-        if (element.id === idItemCart) {
-          element.checkBuyNow = true;
-        } else {
-          element.checkBuyNow = false;
-        }
-      });
-    });
-    await moveToCheckout();
   };
 
-  const moveToCheckout = async () => {
-     localStorage.setItem(
-      "checkOutItem",
-      JSON.stringify(state.checkoutData)
-    );
-    // navigate("/thanh-toan");
+  const moveToCheckout = async (data) => {
+    localStorage.setItem("checkOutItem", JSON.stringify(data));
+    navigate("/thanh-toan");
   };
   const handleItemImage = (item) => {
     setImage(item.url);

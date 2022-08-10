@@ -11,13 +11,24 @@ import { useNavigate } from "react-router-dom";
 
 export const CartItem = (prop) => {
   const item = prop.item;
+  const dataCart = prop.data;
   const checkAll = prop.checkAll;
   const [state, dispatch] = UseStore();
   const { checkAddToCart, CheckCountInCart, checkoutData } = state;
   const [check, setCheck] = useState(false);
   const [edit, setEdit] = useState(false);
   const [count, setCount] = useState(item.quantity);
-  const [variantGroups, setVariantGroups] = useState();
+  const [variantGroups, setVariantGroups] = useState({});
+  const [variantGroupsUpdate, setVariantGroupsUpdate] = useState({});
+  const [variantUpdateSame, setVariantUpdateSame] = useState({});
+
+  const checkFinishUpdate = prop.checkFinishUpdateItemProduct;
+
+  useEffect(() => {
+    setCount(item.quantity);
+    setEdit(false);
+  }, [checkFinishUpdate, item]);
+
   const navigate = useNavigate();
   const ref = useRef([]);
 
@@ -26,11 +37,11 @@ export const CartItem = (prop) => {
   };
   useEffect(() => {
     setCheck(checkAll);
-    console.log("v",item);
   }, [checkAll]);
   useEffect(() => {
     commerce.products.retrieve(item.product_id).then((product) => {
       setVariantGroups(product.variant_groups[0]);
+      console.log(variantGroups);
     });
   }, []);
   const handleCount = (check) => {
@@ -41,11 +52,6 @@ export const CartItem = (prop) => {
     } else {
       setCount(count - 1);
     }
-    // prop.setLoading(true);
-    // commerce.cart.update(item.id, { quantity: count }).then((response) => {
-    //   prop.setLoading(false);
-    //   dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
-    // });
   };
 
   const handleDelete = () => {
@@ -54,15 +60,11 @@ export const CartItem = (prop) => {
       prop.setLoading(false);
       dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
     });
-    // dispatch(action.DeleteProductToCart(item));
-    // console.log(cartProduct);
   };
 
   const handleClick = () => {
     setCheck(!check);
-    const indexCheck = checkoutData.findIndex(
-      (x) => x.product_id === item.product_id
-    );
+    const indexCheck = checkoutData.findIndex((x) => x.id === item.id);
     if (!check) {
       checkoutData[indexCheck].checkBuyNow = true;
     } else {
@@ -71,24 +73,62 @@ export const CartItem = (prop) => {
     dispatch(action.CheckAddToCart(!checkAddToCart));
   };
   const editCount = () => {
-    setEdit(!edit);
+    setEdit(true);
   };
 
   const cancelUpdate = () => {
     setCount(item.quantity);
-    setEdit(!edit);
+    setEdit(false);
   };
 
   const handleFinishCount = () => {
-    prop.setLoading(true);
-    commerce.cart.update(item.id, { quantity: count, option_id: "optn_kd6Ll2QN1n5V2m"}).then((response) => {
-      prop.setLoading(false);
-      dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
-      setEdit(!edit);
+    const key = Object.keys(variantUpdateSame);
+    const value = Object.values(variantUpdateSame);
+
+    let checkProductInCart = false;
+    let productLocation = 0;
+    
+    // kiểm tra xem sản phẩm sau khi update có trùng với sản phẩm trong giỏ hàng hay không
+    dataCart.forEach((element, index) => {
+      if (
+        element.selected_options[0].group_id === key[0] &&
+        element.selected_options[0].option_name === value[0]
+      ) {
+        checkProductInCart = true;
+        productLocation = index;
+      }
     });
+
+    //Cập nhật sản phẩm bị trùng
+    if (checkProductInCart) {
+      prop.UpdateDuplicateProduct(
+        productLocation,
+        count,
+        variantGroupsUpdate,
+        item
+      );
+    } else {
+      let variantGroupsData = {
+        quantity: count,
+        options: variantGroupsUpdate,
+      };
+      prop.setLoading(true);
+      commerce.cart.update(item.id, variantGroupsData).then((response) => {
+        prop.setLoading(false);
+        dispatch(action.CheckChangeCountInCart(!CheckCountInCart));
+        setEdit(false);
+      });
+    }
   };
 
-  const handleSize = (item, indexOption) =>{
+  const handleSize = (item, indexOption) => {
+    console.log(item);
+    setVariantGroupsUpdate({
+      [variantGroups.id]: item.id,
+    });
+    setVariantUpdateSame({
+      [variantGroups.id]: item.name,
+    });
     ref.current.forEach((element, index) => {
       if (index === indexOption) {
         ref.current[index].classList.add("clickOPtion");
@@ -96,7 +136,7 @@ export const CartItem = (prop) => {
         ref.current[index].classList.remove("clickOPtion");
       }
     });
-  }
+  };
   return (
     <div className="cart-item">
       <div className="check">
@@ -122,7 +162,7 @@ export const CartItem = (prop) => {
         <div className="variant_size">
           <span>Kích cỡ: </span>
           {edit ? (
-            variantGroups?.options.map((item, index) => (
+            variantGroups?.options?.map((item, index) => (
               <div
                 ref={(element) => {
                   ref.current[index] = element;
@@ -162,8 +202,12 @@ export const CartItem = (prop) => {
       </div>
       {edit ? (
         <div className="btn_update">
-          <button onClick={handleFinishCount}>Xong</button>
-          <button onClick={cancelUpdate}>Hủy</button>
+          <div>
+            <button onClick={handleFinishCount}>Xong</button>
+          </div>
+          <div>
+            <button onClick={cancelUpdate}>Hủy</button>
+          </div>
         </div>
       ) : (
         <div className="btn_delete">

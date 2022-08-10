@@ -11,6 +11,7 @@ import { HomeSearch } from "../pages/homeSearch/homeSearch";
 import { StoreProvider } from "../store";
 import { Footer } from "../components/layout/footer";
 import { Admin } from "../pages/admin/admin";
+import { Donhang } from "../pages/admin/donhang";
 export const Routerr = (prop) => {
   const [checklogin, setCheckLogin] = useState(false);
   const admin = localStorage.getItem("isAdmin");
@@ -26,6 +27,7 @@ export const Routerr = (prop) => {
           <Router>
               <Routes>
                 <Route path="/bidu-ecommerce" element={<Admin />} />
+                <Route path="/Donhang" element={<Donhang />} />
               </Routes>
           </Router>
         ) : (
